@@ -1,12 +1,6 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
+  /* font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif; */
+  /* color-scheme: light dark; */
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -14,17 +8,28 @@
 }
 
 body {
+  font-family: Encode Sans, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color: #32205f;
+  background-color: #ffffff;
+  width: 100vw;
+  height: 3000px;
   margin: 0;
+  padding: 0;
   display: flex;
   justify-content: center;
-  align-items: center;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
   text-align: center;
+  overflow-x: hidden;
 }
 
-h1 {
+a,
+img {
+  cursor: pointer;
+}
+
+
+/* h1 {
   font-size: 3.2em;
   line-height: 1.1;
 }
@@ -47,4 +52,4 @@ h1 {
   button {
     background-color: #f9f9f9;
   }
-}
+} */
