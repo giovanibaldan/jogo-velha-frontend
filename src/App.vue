@@ -7,9 +7,9 @@ import TableGames from './components/TableGames.vue';
 <template>
   <!-- <div id="app"> -->
   <Header />
-  <!-- <Game /> -->
+  <Game />
   <!-- <TableGames /> -->
-  <h1>Hello World</h1>
+  <!-- <h1>Hello World</h1> -->
   <!-- </div> -->
 </template>
 

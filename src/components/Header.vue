@@ -18,6 +18,9 @@
 </template>
 
 <style scoped>
+.logo-capim{
+    /* width: 100vw; */
+}
 .nav-equality{
     width: 300px;
 }
@@ -63,7 +66,8 @@
     z-index: 100;
 }
 .game-title {
-    font-size: 2rem;
-    font-weight: bold;
+    font-size: 2.2rem;
+    font-weight: 600;
+    filter: drop-shadow(0 0 40px #00a6ff);
 }
 </style>
