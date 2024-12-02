@@ -21,6 +21,7 @@ body {
   justify-content: center;
   text-align: center;
   overflow-x: hidden;
+  user-select: none;
 }
 
 a,

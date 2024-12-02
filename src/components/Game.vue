@@ -18,14 +18,10 @@ function setPlay(cell) {
 
 function setCellColor(cell) {
     if (cell.innerHTML == 'X') {
-        cell.style.color = '#DA0000'
+        cell.style.color = '#E25041'
     } else {
-        cell.style.color = '#0057DA'
+        cell.style.color = '#1BBC9B'
     }
-}
-
-function checkWinner(cell){
-
 }
 
 function resetGame(){
@@ -98,6 +94,7 @@ onMounted(() => {
     height: 200px;
     border: solid 5px black;
     font-size: 130px;
+    font-weight: 900;
     cursor: pointer;
     user-select: none;
     transition: ease 0.2s;

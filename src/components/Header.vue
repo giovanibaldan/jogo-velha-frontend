@@ -68,6 +68,10 @@
 .game-title {
     font-size: 2.2rem;
     font-weight: 600;
-    filter: drop-shadow(0 0 40px #00a6ff);
+    cursor: pointer;
+    transition: ease 0.2s;
+}
+.game-title:hover {
+    filter: drop-shadow(0 0 40px #b7e6ff);
 }
 </style>
