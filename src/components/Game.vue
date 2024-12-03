@@ -4,6 +4,10 @@ import { ref, onMounted } from 'vue'
 let playCounter = ref(0)
 const cells = ref([])
 
+onMounted(() => {
+    cells.value = document.querySelectorAll('.game-cell')
+})
+
 function setPlay(cell) {
     if (cell.innerHTML === '') {
         if (playCounter.value % 2 === 0) {
@@ -31,9 +35,8 @@ function resetGame(){
     playCounter.value = 0
 }
 
-onMounted(() => {
-    cells.value = document.querySelectorAll('.game-cell')
-})
+
+
 
 // export default {
 //     name: "Game"
