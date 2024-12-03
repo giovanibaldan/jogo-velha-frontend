@@ -25,7 +25,7 @@ function setColorGameWinners() {
             <tr class="table-rows table-first-row">
                 <th>ID da Partida</th>
                 <th>Data</th>
-                <th class="table-winner">Vencedor</th>
+                <th>Vencedor</th>
                 <th>Estado Final da Partida</th>
             </tr>
             <tr class="table-rows table-game-row">
@@ -80,10 +80,11 @@ function setColorGameWinners() {
     border: solid 2px #32205f;
     border-radius: 20px;
     padding: 20px;
-    border-spacing: 0 10px; /* Adiciona espaço entre as linhas da tabela */
+    border-spacing: 0 5px; /* Adiciona espaço entre as linhas da tabela */
 }
 .table-winner{
     font-weight: 900;
+    font-size: 25px;
 }
 .table-rows {
 

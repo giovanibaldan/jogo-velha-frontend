@@ -46,11 +46,12 @@ function verifyWinner() {
     verifyRow()
     verifyDiagonal()
     verifyDraw()
-    verifyAbandoned()
+    verifyAbandoned() // Verificar se ainda vai ser necessário
     console.log('Game State:', gameState.value)
 }
 
-function verifyAbandoned() {
+// Verificar se ainda vai ser necessário
+function verifyAbandoned() { 
     if (gameState.value.filter(cell => cell !== '').length < 5) {
         winner.value = ''
     }
