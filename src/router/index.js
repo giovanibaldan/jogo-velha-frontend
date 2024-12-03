@@ -3,8 +3,16 @@ import Game from '../components/Game.vue'
 import TableGames from '../components/TableGames.vue'
 
 const routes = [
-    { path: '/', component: TableGames },
-    { path: '/game/:id', component: Game }
+    {
+        path: '/',
+        name: "TableGames",
+        component: TableGames
+    },
+    {
+        path: '/game',
+        name: "Game",
+        component: Game
+    }
 ]
 
 const router = createRouter({

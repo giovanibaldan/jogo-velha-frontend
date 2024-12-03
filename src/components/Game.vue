@@ -34,6 +34,10 @@ function resetGame(){
 onMounted(() => {
     cells.value = document.querySelectorAll('.game-cell')
 })
+
+// export default {
+//     name: "Game"
+// }
 </script>
 
 <template>

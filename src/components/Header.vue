@@ -1,18 +1,26 @@
 <script>
-
+// export default {
+//     name: "Header"
+// }
 </script>
 
 <template>
     <nav class="navbar">
         <div class="nav-equality">
-            <img src="../assets/images/Logo_Blue.svg" alt="" class="logo-capim">
+            <router-link to="/">
+                <img src="../assets/images/Logo_Blue.svg" alt="" class="logo-capim">
+            </router-link>
         </div>
         <div class="nav-equality">
             <h1 class="game-title">JOGO DA VELHA</h1>
         </div>
         <div class="game-options">
-            <button class="buttons game-new">Novo Jogo</button>
-            <button class="buttons game-table">Histórico de Jogos</button>
+            <router-link to="/game">
+                <button class="buttons game-new">Novo Jogo</button>
+            </router-link>
+            <router-link to="/">
+                <button class="buttons game-table">Histórico de Jogos</button>
+            </router-link>
         </div>
     </nav>
 </template>
