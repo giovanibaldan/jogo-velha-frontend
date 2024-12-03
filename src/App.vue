@@ -5,12 +5,10 @@ import TableGames from './components/TableGames.vue';
 </script>
 
 <template>
-  <!-- <div id="app"> -->
   <Header />
+  <!-- <router-view /> -->
   <Game />
-  <!-- <TableGames /> -->
-  <!-- <h1>Hello World</h1> -->
-  <!-- </div> -->
+  <TableGames />
 </template>
 
 <style scoped></style>
