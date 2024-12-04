@@ -12,7 +12,9 @@ onMounted(() => {
 // Requisição para renderizar todos os jogos na tabela
 async function indexGames() {
     try {
-        const response = await fetch('http://localhost:3000/games')
+        const response = await fetch('http://localhost:3000/games', {
+            method: 'GET'
+        })
         const data = await response.json()
         // Ordena os jogos pelo ID em ordem crescente
         games.value = data.sort((a, b) => a.id - b.id)
@@ -21,13 +23,29 @@ async function indexGames() {
             game.date = new Date(game.created_at).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' })
         })
         console.log('Games:', games.value)
-        // Aguarda a renderização para setar as cores dos vencedores
+        // Aguarda a renderização para setar as cores dos vencedores (se não, a função não encontra os elementos)
         setTimeout(setColorGameWinners, 0)
     } catch (error) {
         console.error('Fetch error:', error)
     }
 }
 
+// Requisição para deletar um jogo pelo botão da coluna Deletar Partida
+async function deleteGame(id) {
+    try {
+        const response = await fetch(`http://localhost:3000/games/${id}`, {
+            method: 'DELETE'
+        })
+        const data = await response.json()
+        console.log('Jogo apagado:', data)
+        // Atualiza a tabela após deletar um jogo
+        indexGames()
+    } catch (error) {
+        console.error('Fetch error:', error)
+    }
+}
+
+// Função para setar as cores dos vencedores e modificar o tamanho da fonte do Empate
 function setColorGameWinners() {
     gameWinners.value = document.querySelectorAll('.table-winner')
     gameWinners.value.forEach(winner => {
@@ -57,7 +75,7 @@ function setColorGameWinners() {
                 <td>{{ game.date }}</td>
                 <td class="table-winner">{{ game.winner }}</td>
                 <td><a>Ver resultado do jogo</a></td>
-                <td><img class="table-delete-game" src="../assets/images/icon-delete.png" alt="Deletar Partida"></td>
+                <td><img class="table-delete-game" src="../assets/images/icon-delete.png" alt="Deletar Partida" @click="deleteGame(game.id)"></td>
             </tr>
         </table>
     </div>
