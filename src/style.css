@@ -25,7 +25,35 @@ body {
 }
 
 a,
-img {
+img,
+button {
+  cursor: pointer;
+}
+
+/* Estilização de botões que estavam anteriormente apenas em Header.vue */
+.game-button-new{
+  background-color: white;
+  color: #32205f;
+}
+.game-button-table{
+  background-color: #32205f;
+  color: white;
+}
+.buttons:hover{
+  background-color: #bee41e;
+  border: solid 2px #bee41e;
+  color: #32205f;
+}
+.buttons{
+  transition: ease 0.3s;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 100%;
+  margin-bottom: 0;
+  margin-top: 0;
+  padding: 14px;
+  border: 2px solid #32205f;
+  border-radius: 32px;
   cursor: pointer;
 }
 

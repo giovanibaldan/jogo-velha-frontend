@@ -1,4 +1,5 @@
 <script setup>
+console.log("Inicio do console em TableGames.vue")
 import { ref, onMounted } from 'vue'
 
 const gameWinners = ref([])

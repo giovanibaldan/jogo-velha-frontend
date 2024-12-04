@@ -1,5 +1,4 @@
 <script>
-
 </script>
 
 <template>
@@ -14,10 +13,10 @@
         </div>
         <div class="game-options">
             <router-link to="/game">
-                <button class="buttons game-new">Novo Jogo</button>
+                <button class="buttons game-button-new">Novo Jogo</button>
             </router-link>
             <router-link to="/">
-                <button class="buttons game-table">Histórico de Jogos</button>
+                <button class="buttons game-button-table">Histórico de Jogos</button>
             </router-link>
         </div>
     </nav>
@@ -30,31 +29,7 @@
 .nav-equality{
     width: 300px;
 }
-.game-new{
-    background-color: white;
-    color: #32205f;
-}
-.game-table{
-    background-color: #32205f;
-    color: white;
-}
-.buttons:hover{
-    background-color: #bee41e;
-    border: solid 2px #bee41e;
-    color: #32205f;
-}
-.buttons{
-    transition: ease 0.3s;
-    font-size: 15px;
-    font-weight: 600;
-    line-height: 100%;
-    margin-bottom: 0;
-    margin-top: 0;
-    padding: 14px;
-    border: 2px solid #32205f;
-    border-radius: 32px;
-    cursor: pointer;
-}
+
 .game-options{
     width: 300px;
     display: flex;

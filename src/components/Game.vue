@@ -1,10 +1,15 @@
 <script setup>
+console.log("Inicio do console em Game.vue")
 import { ref, onMounted } from 'vue'
 
 let playCounter = ref(0)
 const cells = ref([])
 const gameState = ref(Array(9).fill(''))
 const winner = ref('')
+
+onMounted(() => {
+    cells.value = document.querySelectorAll('.game-cell')
+})
 
 function setPlay(cell, index) {
     if (cell.innerHTML === '' && winner.value === '') {
@@ -47,11 +52,16 @@ function verifyWinner() {
     verifyDiagonal()
     verifyDraw()
     verifyAbandoned() // Verificar se ainda vai ser necessário
-    console.log('Game State:', gameState.value)
-}
+    if (winner.value !== '') {
+        openWindowFinishedGame()
+        console.log('Jogo finalizado:', gameState.value)
+    } else {
+        console.log('Verificando vencedor:', gameState.value)
+    }
+    }
 
 // Verificar se ainda vai ser necessário
-function verifyAbandoned() { 
+function verifyAbandoned() {
     if (gameState.value.filter(cell => cell !== '').length < 5) {
         winner.value = ''
     }
@@ -87,13 +97,44 @@ function verifyDiagonal() {
     }
 }
 
-onMounted(() => {
-    cells.value = document.querySelectorAll('.game-cell')
-})
+function openWindowFinishedGame() {
+    document.querySelector('.game-finished-div').style.display = 'flex'
+}
+
+function closeWindowFinishedGame() {
+    document.querySelector('.game-finished-div').style.display = 'none'
+}
+
+function handleFinishedNewGame() {
+    resetGame()
+    closeWindowFinishedGame()
+}
+
+
 </script>
 
 <template>
     <div class="game-div">
+        <div class='game-finished-div'>
+            <nav class="game-finished-nav">
+                <button class="game-finished-close" @click="closeWindowFinishedGame()">X</button>
+            </nav>
+            <h1 class="game-finished-title">Jogo finalizado!</h1>
+            <div v-if="winner === 'X' || winner === 'O'">
+                <p class="game-finished-winner">Vencedor: {{ winner }}</p>
+            </div>
+            <div v-if="winner === 'Draw'">
+                <p class="game-finished-winner">Empate</p>
+            </div>
+            <div class="game-finished-buttons-div" v-if="winner !== ''">
+                <router-link to="/game">
+                    <button class="buttons game-button-new" @click="handleFinishedNewGame()">Novo Jogo</button>
+                </router-link>
+                <router-link to="/">
+                    <button class="buttons game-button-table">Histórico de Jogos</button>
+                </router-link>
+            </div>
+        </div>
         <table class="game-table">
             <tr class="game-row" id="row-1">
                 <td class="game-cell" id="cell-0" @click="setPlay($event.target, 0)"></td>
@@ -113,16 +154,61 @@ onMounted(() => {
         </table>
     </div>
     <button class="game-reset" @click="resetGame">Recomeçar Partida</button>
-    <div v-if="winner === 'X' || winner === 'O'">
-        <p>Vencedor: {{ winner }}</p>
-    </div>
-    <div v-if="winner === 'Draw'">
-        <p>Empate!</p>
-    </div>
 </template>
 
 <style scoped>
+.game-finished-winner {
+    font-size: 20px;
+    font-weight: 600;
+}
+.game-finished-div {
+    position: fixed;
+    width: 20%;
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255);
+    /* padding: 10; */
+    border: solid 3px black;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+
+}
+
+.game-finished-nav {
+    display: flex;
+    justify-content: flex-end;
+    padding: 5px;
+
+}
+
+.game-finished-close {
+    border: solid 1px rgb(230, 230, 230);
+    border-radius: 5px;
+    width: 40px;
+    height: 30px;
+    font-weight: 900;
+    font-size: 20px;
+    color: red;
+    background-color: white;
+}
+
+.game-finished-title {
+    margin: 0;
+}
+
+.game-finished-buttons-div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
 .game-reset {
+    /* position: absolute;
+    top: 50vh;
+    right: 20vw; */
     transition: ease 0.3s;
     font-size: 15px;
     font-weight: 600;
@@ -134,11 +220,11 @@ onMounted(() => {
     border-radius: 32px;
     cursor: pointer;
     margin-top: 30px;
-    background-color: rgba(255, 162, 0, 0.4);
+    background-color: rgba(255, 0, 0, 0.2);
 }
 
 .game-reset:hover {
-    background-color: rgba(255, 162, 0, 0.7);
+    background-color: rgba(255, 0, 0, 0.3);
 }
 
 .game-div {
