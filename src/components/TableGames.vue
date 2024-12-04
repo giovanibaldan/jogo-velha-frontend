@@ -28,74 +28,88 @@ function setColorGameWinners() {
                 <th>Data</th>
                 <th>Vencedor</th>
                 <th>Estado Final da Partida</th>
+                <th>Deletar partida</th>
             </tr>
             <tr class="table-rows table-game-row">
                 <td>1</td>
                 <td>03/12/2024</td>
                 <td class="table-winner">X</td>
                 <td><a>Ver resultado do jogo</a></td>
+                <td><img class="table-delete-game" src="../assets/images/icon-delete.png" alt="Deletar Partida"></td>
             </tr>
             <tr class="table-rows table-game-row">
                 <td>2</td>
                 <td>03/12/2024</td>
                 <td class="table-winner">O</td>
                 <td><a>Ver resultado do jogo</a></td>
+                <td><img class="table-delete-game" src="../assets/images/icon-delete.png" alt="Deletar Partida"></td>
             </tr>
             <tr class="table-rows table-game-row">
                 <td>3</td>
                 <td>03/12/2024</td>
                 <td class="table-winner">X</td>
                 <td><a>Ver resultado do jogo</a></td>
+                <td><img class="table-delete-game" src="../assets/images/icon-delete.png" alt="Deletar Partida"></td>
             </tr>
             <tr class="table-rows table-game-row">
                 <td>4</td>
                 <td>03/12/2024</td>
                 <td class="table-winner">O</td>
                 <td><a>Ver resultado do jogo</a></td>
+                <td><img class="table-delete-game" src="../assets/images/icon-delete.png" alt="Deletar Partida"></td>
             </tr>
             <tr class="table-rows table-game-row">
                 <td>5</td>
                 <td>03/12/2024</td>
                 <td class="table-winner">X</td>
                 <td><a>Ver resultado do jogo</a></td>
+                <td><img class="table-delete-game" src="../assets/images/icon-delete.png" alt="Deletar Partida"></td>
             </tr>
             <tr class="table-rows table-game-row">
                 <td>6</td>
                 <td>03/12/2024</td>
                 <td class="table-winner">O</td>
                 <td><a>Ver resultado do jogo</a></td>
+                <td><img class="table-delete-game" src="../assets/images/icon-delete.png" alt="Deletar Partida"></td>
             </tr>
         </table>
     </div>
 </template>
 
 <style scoped>
-.div-table-games{
+.table-delete-game {
+    width: 20px;
+    cursor: pointer;
+    transition: filter 0.3s;
+}
+
+.table-delete-game:hover {
+    filter: brightness(0.7);
+}
+
+.div-table-games {
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 .table-main {
-    width: 60%; 
+    width: 60%;
     border: solid 2px #32205f;
     border-radius: 20px;
     padding: 20px;
     border-spacing: 0 5px; /* Adiciona espaço entre as linhas da tabela */
 }
-.table-winner{
+
+.table-winner {
     font-weight: 900;
     font-size: 25px;
 }
-.table-rows {
 
-}
+.table-rows {}
 
-.table-first-row {
+.table-first-row {}
 
-}
-
-.table-game-row {
-
-}
+.table-game-row {}
 </style>
