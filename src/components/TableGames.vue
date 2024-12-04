@@ -3,18 +3,40 @@ console.log("Inicio do console em TableGames.vue")
 import { ref, onMounted } from 'vue'
 
 const gameWinners = ref([])
+const games = ref([])
 
 onMounted(() => {
-    gameWinners.value = document.querySelectorAll('.table-winner')
-    setColorGameWinners()
+    indexGames()
 })
 
+// Requisição para renderizar todos os jogos na tabela
+async function indexGames() {
+    try {
+        const response = await fetch('http://localhost:3000/games')
+        const data = await response.json()
+        // Ordena os jogos pelo ID em ordem crescente
+        games.value = data.sort((a, b) => a.id - b.id)
+        // Cria o atributo .date para game e formata a data para DD/MM/YYYY
+        games.value.forEach(game => {
+            game.date = new Date(game.created_at).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' })
+        })
+        console.log('Games:', games.value)
+        // Aguarda a renderização para setar as cores dos vencedores
+        setTimeout(setColorGameWinners, 0)
+    } catch (error) {
+        console.error('Fetch error:', error)
+    }
+}
+
 function setColorGameWinners() {
+    gameWinners.value = document.querySelectorAll('.table-winner')
     gameWinners.value.forEach(winner => {
         if (winner.innerHTML === 'X') {
             winner.style.color = '#E25041'
         } else if (winner.innerHTML === 'O') {
             winner.style.color = '#1BBC9B'
+        } else if (winner.innerHTML === 'Empate') {
+            winner.style.fontSize = '18px'
         }
     })
 }
@@ -30,45 +52,10 @@ function setColorGameWinners() {
                 <th>Estado Final da Partida</th>
                 <th>Deletar partida</th>
             </tr>
-            <tr class="table-rows table-game-row">
-                <td>1</td>
-                <td>03/12/2024</td>
-                <td class="table-winner">X</td>
-                <td><a>Ver resultado do jogo</a></td>
-                <td><img class="table-delete-game" src="../assets/images/icon-delete.png" alt="Deletar Partida"></td>
-            </tr>
-            <tr class="table-rows table-game-row">
-                <td>2</td>
-                <td>03/12/2024</td>
-                <td class="table-winner">O</td>
-                <td><a>Ver resultado do jogo</a></td>
-                <td><img class="table-delete-game" src="../assets/images/icon-delete.png" alt="Deletar Partida"></td>
-            </tr>
-            <tr class="table-rows table-game-row">
-                <td>3</td>
-                <td>03/12/2024</td>
-                <td class="table-winner">X</td>
-                <td><a>Ver resultado do jogo</a></td>
-                <td><img class="table-delete-game" src="../assets/images/icon-delete.png" alt="Deletar Partida"></td>
-            </tr>
-            <tr class="table-rows table-game-row">
-                <td>4</td>
-                <td>03/12/2024</td>
-                <td class="table-winner">O</td>
-                <td><a>Ver resultado do jogo</a></td>
-                <td><img class="table-delete-game" src="../assets/images/icon-delete.png" alt="Deletar Partida"></td>
-            </tr>
-            <tr class="table-rows table-game-row">
-                <td>5</td>
-                <td>03/12/2024</td>
-                <td class="table-winner">X</td>
-                <td><a>Ver resultado do jogo</a></td>
-                <td><img class="table-delete-game" src="../assets/images/icon-delete.png" alt="Deletar Partida"></td>
-            </tr>
-            <tr class="table-rows table-game-row">
-                <td>6</td>
-                <td>03/12/2024</td>
-                <td class="table-winner">O</td>
+            <tr v-for="game in games" :key="game.id" class="table-rows table-game-row">
+                <td>{{ game.id }}</td>
+                <td>{{ game.date }}</td>
+                <td class="table-winner">{{ game.winner }}</td>
                 <td><a>Ver resultado do jogo</a></td>
                 <td><img class="table-delete-game" src="../assets/images/icon-delete.png" alt="Deletar Partida"></td>
             </tr>
@@ -78,7 +65,7 @@ function setColorGameWinners() {
 
 <style scoped>
 .table-delete-game {
-    width: 20px;
+    width: 25px;
     cursor: pointer;
     transition: filter 0.3s;
 }
@@ -99,12 +86,13 @@ function setColorGameWinners() {
     border: solid 2px #32205f;
     border-radius: 20px;
     padding: 20px;
-    border-spacing: 0 5px; /* Adiciona espaço entre as linhas da tabela */
+    border-spacing: 0 15px; /* Adiciona espaço entre as linhas da tabela */
 }
 
 .table-winner {
     font-weight: 900;
     font-size: 25px;
+    height: 40px; /* A div do Empate estava ficando menor que os outros */
 }
 
 .table-rows {}
