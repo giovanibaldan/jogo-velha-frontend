@@ -99,10 +99,16 @@ function verifyDiagonal() {
 
 function openWindowFinishedGame() {
     document.querySelector('.game-finished-div').style.display = 'flex'
+    // document.querySelector('.game-blackscreen').style.display = 'block'
+    const blackscreen = document.querySelector('.game-blackscreen')
+    blackscreen.classList.add('visible')
 }
 
 function closeWindowFinishedGame() {
     document.querySelector('.game-finished-div').style.display = 'none'
+    // document.querySelector('.game-blackscreen').style.display = 'none'
+    const blackscreen = document.querySelector('.game-blackscreen')
+    blackscreen.classList.remove('visible')
 }
 
 function handleFinishedNewGame() {
@@ -115,6 +121,7 @@ function handleFinishedNewGame() {
 
 <template>
     <div class="game-div">
+        <div class="game-blackscreen"></div>
         <div class='game-finished-div'>
             <nav class="game-finished-nav">
                 <button class="game-finished-close" @click="closeWindowFinishedGame()">X</button>
@@ -157,11 +164,27 @@ function handleFinishedNewGame() {
 </template>
 
 <style scoped>
+.game-blackscreen{
+    z-index: 10;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 100;
+    opacity: 0;
+    transition: opacity 0.5s;
+    pointer-events: none;
+}
+.game-blackscreen.visible{
+    opacity: 1;
+    pointer-events: auto;
+}
 .game-finished-winner {
     font-size: 20px;
     font-weight: 600;
 }
 .game-finished-div {
+    z-index: 100;
     position: fixed;
     width: 20%;
     border-radius: 10px;
@@ -171,18 +194,17 @@ function handleFinishedNewGame() {
     display: none;
     flex-direction: column;
     justify-content: center;
-
 }
-
 .game-finished-nav {
     display: flex;
     justify-content: flex-end;
     padding: 5px;
-
 }
 
 .game-finished-close {
-    border: solid 1px rgb(230, 230, 230);
+    /* border: solid 1px rgb(230, 230, 230); */
+    border: none;
+    box-shadow: 1px 1px 1px 1px black;
     border-radius: 5px;
     width: 40px;
     height: 30px;
@@ -190,6 +212,11 @@ function handleFinishedNewGame() {
     font-size: 20px;
     color: red;
     background-color: white;
+    transition: ease 0.3s;
+}
+.game-finished-close:hover{
+    background-color: rgb(250, 250, 250);
+    box-shadow: none;
 }
 
 .game-finished-title {
