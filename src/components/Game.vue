@@ -7,6 +7,12 @@ const cells = ref([])
 const gameState = ref(Array(9).fill(''))
 const winner = ref('')
 
+const GAME_STATES = {
+    draw: 'Empate',
+    xWin: 'X',
+    oWin: 'O'
+}
+
 onMounted(() => {
     cells.value = document.querySelectorAll('.game-cell')
 })
@@ -103,7 +109,7 @@ function verifyAbandoned() {
 
 function verifyDraw() {
     if (winner.value === '' && gameState.value.every(cell => cell !== '')) {
-        winner.value = 'Draw'
+        winner.value = GAME_STATES['draw']
     }
 }
 
@@ -166,7 +172,7 @@ function handleFinishedNewGame() {
             <div v-if="winner === 'X' || winner === 'O'">
                 <p class="game-finished-winner">Vencedor: {{ winner }}</p>
             </div>
-            <div v-if="winner === 'Draw'">
+            <div v-if="winner === GAME_STATES['draw']">
                 <p class="game-finished-winner">Empate</p>
             </div>
             <div class="game-finished-buttons-div" v-if="winner !== ''">
