@@ -11,6 +11,38 @@ onMounted(() => {
     cells.value = document.querySelectorAll('.game-cell')
 })
 
+async function saveGame() {
+    try {
+        const response = await fetch (`http://localhost:3000/games`, {
+            method: 'POST'
+        })
+        const data = await response.json()
+        // console.log('Jogo criado', data)
+        await saveGameData(data.id)
+    } catch (error){
+        console.log('Erro no fetch:', error)
+    }
+}
+
+async function saveGameData(id){
+    try {
+        const response = await fetch (`http://localhost:3000/games/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                game_state: gameState.value,
+                winner: winner.value
+            })
+        })
+        const data = await response.json()
+        // console.log('Jogo atualizado:', data)
+    } catch (error){
+        console.log('Erro no fetch:', error)
+    }
+}
+
 function setPlay(cell, index) {
     if (cell.innerHTML === '' && winner.value === '') {
         if (playCounter.value % 2 === 0) {
@@ -22,7 +54,7 @@ function setPlay(cell, index) {
         }
         playCounter.value++
         setCellColor(cell)
-        if (gameState.value.filter(cell => cell !== '').length >= 5) { // Verificar a partir de 5 jogdas
+        if (gameState.value.filter(cell => cell !== '').length >= 5) { // Verificar a partir de 5 jogadas
             verifyWinner()
         }
     }
@@ -54,6 +86,7 @@ function verifyWinner() {
     verifyAbandoned() // Verificar se ainda vai ser necessário
     if (winner.value !== '') {
         openWindowFinishedGame()
+        saveGame()
         console.log('Jogo finalizado:', gameState.value)
     } else {
         console.log('Verificando vencedor:', gameState.value)
@@ -64,6 +97,7 @@ function verifyWinner() {
 function verifyAbandoned() {
     if (gameState.value.filter(cell => cell !== '').length < 5) {
         winner.value = ''
+        return true
     }
 }
 
@@ -144,7 +178,6 @@ function handleFinishedNewGame() {
                 </router-link>
             </div>
         </div>
-
 
         <table class="game-table">
             <tr class="game-row" id="row-1">

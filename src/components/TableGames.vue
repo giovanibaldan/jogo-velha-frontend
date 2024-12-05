@@ -26,6 +26,7 @@ async function indexGames() {
         console.log('Games:', games.value)
         // Aguarda a renderização para setar as cores dos vencedores (se não, a função não encontra os elementos)
         setTimeout(setColorGameWinners, 0)
+        // setColorGameWinners()
     } catch (error) {
         console.error('Fetch error:', error)
     }
@@ -85,13 +86,14 @@ function setColorGameWinners() {
     })
 }
 
-function setCellColor(cell) {
-    if (cell.innerHTML == 'X') {
-        cell.style.color = '#E25041'
-    } else {
-        cell.style.color = '#1BBC9B'
-    }
-}
+// function setCellColorGameState(cell) {
+//     if (cell.innerHTML == 'X') {
+//         cell.style.color = '#E25041'
+//     } else {
+//         cell.style.color = '#1BBC9B'
+//     }
+// }
+
 </script>
 
 <template>
@@ -142,7 +144,6 @@ function setCellColor(cell) {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* padding: 20px; */
 }
 
 .nav-game-state {
@@ -196,12 +197,11 @@ function setCellColor(cell) {
 }
 
 .game-blackscreen {
-    z-index: 1000;
+    z-index: 10;
     position: fixed;
     width: 100vw;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.6);
-    z-index: 100;
     opacity: 0;
     transition: opacity 0.5s;
     pointer-events: none;
@@ -222,14 +222,12 @@ function setCellColor(cell) {
     font-weight: 600;
     font-size: 12px;
     cursor: pointer;
-    /* transition: filter 0.3s; */
     transition: ease 0.3s;
 }
 
 .table-view-game:hover {
     background-color: #bee41e;
     border: solid 1px #bee41e;
-    /* filter: brightness(0.9); */
 }
 
 .table-delete-game {
@@ -243,12 +241,11 @@ function setCellColor(cell) {
 }
 
 .div-table-games {
-    /* margin-top: 20px; */
-    width: 100%;
-    height: 100%;
+    /* width: 100vw;
+    height: 100vh; */
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
 }
 
 .table-main {
