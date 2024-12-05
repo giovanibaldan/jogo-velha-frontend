@@ -97,8 +97,11 @@ function setColorGameWinners() {
 </script>
 
 <template>
+
     <div class="div-table-games">
+
         <div class="game-blackscreen"></div>
+        
         <table class="table-main">
             <tr class="table-rows table-first-row">
                 <th>ID da Partida</th>
@@ -116,6 +119,7 @@ function setColorGameWinners() {
                         @click="deleteGame(game.id)"></td>
             </tr>
         </table>
+
         <div v-if="gameState" class="div-game-state">
             <nav class="nav-game-state">
                 <button class="close-game-state" @click="closeGameState()">X</button>
@@ -133,7 +137,9 @@ function setColorGameWinners() {
 
 <style scoped>
 .div-game-state {
-    align-self: center;
+    align-self: flex-start  ; /* Arrumar aqui */
+    top: 30%;
+    left: 50;
     z-index: 100;
     position: fixed;
     width: 400px;
@@ -197,8 +203,10 @@ function setColorGameWinners() {
 }
 
 .game-blackscreen {
-    z-index: 10;
+    z-index: 50;
     position: fixed;
+    top: 0;
+    left: 0;
     width: 100vw;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.6);
@@ -241,11 +249,10 @@ function setColorGameWinners() {
 }
 
 .div-table-games {
-    /* width: 100vw;
-    height: 100vh; */
+    width: 100vw;
+    height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: center;
 }
 
 .table-main {

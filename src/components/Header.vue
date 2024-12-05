@@ -44,7 +44,7 @@
     width: 100vw;
     height: 100px;
     top: 0;
-    z-index: 100;
+    z-index: 10;
     margin-bottom: 20px;
 }
 .game-title {

@@ -203,12 +203,11 @@ function handleFinishedNewGame() {
 
 <style scoped>
 .game-blackscreen{
-    z-index: 10;
+    z-index: 100;
     position: fixed;
     width: 100vw;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.6);
-    z-index: 100;
     opacity: 0;
     transition: opacity 0.5s;
     pointer-events: none;
