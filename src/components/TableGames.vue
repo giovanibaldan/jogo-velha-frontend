@@ -4,6 +4,7 @@ import { ref, onMounted } from 'vue'
 
 const gameWinners = ref([])
 const games = ref([])
+const gameState = ref(null)
 
 onMounted(() => {
     indexGames()
@@ -45,6 +46,31 @@ async function deleteGame(id) {
     }
 }
 
+async function getGameState(id) {
+    try {
+        const response = await fetch(`http://localhost:3000/games/${id}`, {
+            method: 'GET'
+        })
+        const data = await response.json()
+        gameState.value = data.game_state // Define o estado do jogo
+        console.log('Game State:', gameState.value)
+    } catch (error) {
+        console.error('Fetch error:', error)
+    }
+}
+
+function showGameState(id) {
+    getGameState(id)
+    const blackscreen = document.querySelector('.game-blackscreen')
+    blackscreen.classList.add('visible')
+}
+
+function closeGameState() {
+    gameState.value = null
+    const blackscreen = document.querySelector('.game-blackscreen')
+    blackscreen.classList.remove('visible')
+}
+
 // Função para setar as cores dos vencedores e modificar o tamanho da fonte do Empate
 function setColorGameWinners() {
     gameWinners.value = document.querySelectorAll('.table-winner')
@@ -58,10 +84,19 @@ function setColorGameWinners() {
         }
     })
 }
+
+function setCellColor(cell) {
+    if (cell.innerHTML == 'X') {
+        cell.style.color = '#E25041'
+    } else {
+        cell.style.color = '#1BBC9B'
+    }
+}
 </script>
 
 <template>
     <div class="div-table-games">
+        <div class="game-blackscreen"></div>
         <table class="table-main">
             <tr class="table-rows table-first-row">
                 <th>ID da Partida</th>
@@ -74,14 +109,129 @@ function setColorGameWinners() {
                 <td>{{ game.id }}</td>
                 <td>{{ game.date }}</td>
                 <td class="table-winner">{{ game.winner }}</td>
-                <td><a>Ver resultado do jogo</a></td>
-                <td><img class="table-delete-game" src="../assets/images/icon-delete.png" alt="Deletar Partida" @click="deleteGame(game.id)"></td>
+                <td><button class="table-view-game" @click="showGameState(game.id)">Ver resultado do jogo</button></td>
+                <td><img class="table-delete-game" src="../assets/images/icon-delete.png" alt="Deletar Partida"
+                        @click="deleteGame(game.id)"></td>
             </tr>
         </table>
+        <div v-if="gameState" class="div-game-state">
+            <nav class="nav-game-state">
+                <button class="close-game-state" @click="closeGameState()">X</button>
+            </nav>
+            <div class="board-game-state">
+                <div class="board-game-row" v-for="(row, rowIndex) in [0, 1, 2]" :key="rowIndex">
+                    <div class="board-game-cell"
+                        v-for="(cell, cellIndex) in gameState.slice(rowIndex * 3, rowIndex * 3 + 3)" :key="cellIndex">{{
+                        cell }}</div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
 <style scoped>
+.div-game-state {
+    align-self: center;
+    z-index: 100;
+    position: fixed;
+    width: 400px;
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255);
+    border: solid 3px black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* padding: 20px; */
+}
+
+.nav-game-state {
+    display: flex;
+    align-self: flex-end;
+    padding: 5px;
+}
+
+.close-game-state {
+    border: none;
+    box-shadow: 1px 1px 1px 1px black;
+    border-radius: 5px;
+    width: 40px;
+    height: 30px;
+    font-weight: 900;
+    font-size: 20px;
+    color: red;
+    background-color: white;
+    transition: ease 0.3s;
+}
+
+.close-game-state:hover {
+    background-color: rgb(250, 250, 250);
+    box-shadow: none;
+}
+
+.board-game-state {
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    gap: 0;
+    margin: 20px;
+}
+
+.board-game-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.board-game-cell {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: solid 1px black;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+    transition: ease 0.2s;
+}
+
+.game-blackscreen {
+    z-index: 1000;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 100;
+    opacity: 0;
+    transition: opacity 0.5s;
+    pointer-events: none;
+}
+
+.game-blackscreen.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.table-view-game {
+    width: 150px;
+    height: 30px;
+    color: #32205f;
+    background-color: white;
+    border: solid 1px #32205f;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 12px;
+    cursor: pointer;
+    /* transition: filter 0.3s; */
+    transition: ease 0.3s;
+}
+
+.table-view-game:hover {
+    background-color: #bee41e;
+    border: solid 1px #bee41e;
+    /* filter: brightness(0.9); */
+}
+
 .table-delete-game {
     width: 25px;
     cursor: pointer;
@@ -93,10 +243,12 @@ function setColorGameWinners() {
 }
 
 .div-table-games {
+    /* margin-top: 20px; */
     width: 100%;
+    height: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .table-main {
@@ -104,13 +256,15 @@ function setColorGameWinners() {
     border: solid 2px #32205f;
     border-radius: 20px;
     padding: 20px;
-    border-spacing: 0 15px; /* Adiciona espaço entre as linhas da tabela */
+    border-spacing: 0 15px;
+    /* Adiciona espaço entre as linhas da tabela */
 }
 
 .table-winner {
     font-weight: 900;
     font-size: 25px;
-    height: 40px; /* A div do Empate estava ficando menor que os outros */
+    height: 40px;
+    /* A div do Empate estava ficando menor que os outros */
 }
 
 .table-rows {}

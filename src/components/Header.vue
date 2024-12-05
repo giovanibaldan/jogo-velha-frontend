@@ -45,6 +45,7 @@
     height: 100px;
     top: 0;
     z-index: 100;
+    margin-bottom: 20px;
 }
 .game-title {
     font-size: 2.2rem;

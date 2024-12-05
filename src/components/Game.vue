@@ -121,7 +121,9 @@ function handleFinishedNewGame() {
 
 <template>
     <div class="game-div">
+
         <div class="game-blackscreen"></div>
+
         <div class='game-finished-div'>
             <nav class="game-finished-nav">
                 <button class="game-finished-close" @click="closeWindowFinishedGame()">X</button>
@@ -142,6 +144,8 @@ function handleFinishedNewGame() {
                 </router-link>
             </div>
         </div>
+
+
         <table class="game-table">
             <tr class="game-row" id="row-1">
                 <td class="game-cell" id="cell-0" @click="setPlay($event.target, 0)"></td>
@@ -159,6 +163,7 @@ function handleFinishedNewGame() {
                 <td class="game-cell" id="cell-8" @click="setPlay($event.target, 8)"></td>
             </tr>
         </table>
+        
     </div>
     <button class="game-reset" @click="resetGame">Recomeçar Partida</button>
 </template>
@@ -189,7 +194,6 @@ function handleFinishedNewGame() {
     width: 20%;
     border-radius: 10px;
     background-color: rgb(255, 255, 255);
-    /* padding: 10; */
     border: solid 3px black;
     display: none;
     flex-direction: column;
@@ -202,7 +206,6 @@ function handleFinishedNewGame() {
 }
 
 .game-finished-close {
-    /* border: solid 1px rgb(230, 230, 230); */
     border: none;
     box-shadow: 1px 1px 1px 1px black;
     border-radius: 5px;
@@ -255,7 +258,7 @@ function handleFinishedNewGame() {
 }
 
 .game-div {
-    margin-top: 20px;
+    /* margin-top: 20px; */
     display: flex;
     justify-content: center;
     align-items: center;
