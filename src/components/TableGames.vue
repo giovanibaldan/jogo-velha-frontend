@@ -8,6 +8,9 @@ const gameState = ref(null)
 
 onMounted(() => {
     indexGames()
+        .then(() => { // Aguarda a renderização para setar as cores dos vencedores (se não, a função não encontra os elementos)
+            setColorGameWinners()
+        })
 })
 
 // Requisição para renderizar todos os jogos na tabela
@@ -16,23 +19,17 @@ async function indexGames() {
         const response = await fetch('http://localhost:3000/games', {
             method: 'GET'
         })
-        const data = await response.json()
-        // Ordena os jogos pelo ID em ordem crescente
-        games.value = data.sort((a, b) => a.id - b.id)
-        // Cria o atributo .date para game e formata a data para DD/MM/YYYY
-        games.value.forEach(game => {
+        const data = await response.json() // Ordena os jogos pelo ID em ordem crescente
+        games.value = data.sort((b, a) => a.id - b.id)
+        games.value.forEach(game => { // Cria o atributo .date para game e formata a data para DD/MM/YYYY
             game.date = new Date(game.created_at).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' })
         })
         console.log('Games:', games.value)
-        // Aguarda a renderização para setar as cores dos vencedores (se não, a função não encontra os elementos)
-        setTimeout(setColorGameWinners, 0)
-        // setColorGameWinners()
     } catch (error) {
         console.error('Fetch error:', error)
     }
 }
 
-// Requisição para deletar um jogo pelo botão da coluna Deletar Partida
 async function deleteGame(id) {
     try {
         const response = await fetch(`http://localhost:3000/games/${id}`, {
@@ -40,7 +37,6 @@ async function deleteGame(id) {
         })
         const data = await response.json()
         console.log('Jogo apagado:', data)
-        // Atualiza a tabela após deletar um jogo
         indexGames()
     } catch (error) {
         console.error('Fetch error:', error)
@@ -53,24 +49,26 @@ async function getGameState(id) {
             method: 'GET'
         })
         const data = await response.json()
-        gameState.value = data.game_state // Define o estado do jogo
+        gameState.value = data.game_state
         console.log('Game State:', gameState.value)
     } catch (error) {
         console.error('Fetch error:', error)
     }
 }
 
+// Funções para mostrar e fechar o estado final da partida
 function showGameState(id) {
     getGameState(id)
-    const blackscreen = document.querySelector('.game-blackscreen')
+    const blackscreen = document.querySelector('.blackscreen')
     blackscreen.classList.add('visible')
 }
 
 function closeGameState() {
     gameState.value = null
-    const blackscreen = document.querySelector('.game-blackscreen')
+    const blackscreen = document.querySelector('.blackscreen')
     blackscreen.classList.remove('visible')
 }
+// Fim
 
 // Função para setar as cores dos vencedores e modificar o tamanho da fonte do Empate
 function setColorGameWinners() {
@@ -86,22 +84,12 @@ function setColorGameWinners() {
     })
 }
 
-// function setCellColorGameState(cell) {
-//     if (cell.innerHTML == 'X') {
-//         cell.style.color = '#E25041'
-//     } else {
-//         cell.style.color = '#1BBC9B'
-//     }
-// }
-
 </script>
 
 <template>
-
     <div class="div-table-games">
 
-        <div class="game-blackscreen"></div>
-
+        <!-- Tabela de histórico de jogos -->
         <table class="table-main">
             <tr class="table-rows table-first-row">
                 <th>ID da Partida</th>
@@ -120,6 +108,7 @@ function setColorGameWinners() {
             </tr>
         </table>
 
+        <!-- Estado final da partida -->
         <div v-if="gameState" class="div-game-state">
             <nav class="nav-game-state">
                 <button class="close-game-state" @click="closeGameState()">X</button>
@@ -132,10 +121,74 @@ function setColorGameWinners() {
                 </div>
             </div>
         </div>
+
+        <!-- Fundo preto-->
+        <div class="blackscreen"></div>
+
     </div>
 </template>
 
 <style scoped>
+.div-table-games {
+    width: 100vw;
+    padding-bottom: 20px;
+    /* Adiciona espaço entre a tabela e o rodapé */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.table-main {
+    width: 60%;
+    border: solid 2px #32205f;
+    border-radius: 20px;
+    padding: 20px;
+    border-spacing: 0 15px;
+    /* Adiciona espaço entre as linhas da tabela */
+}
+
+.table-rows {}
+
+.table-first-row {}
+
+.table-game-row {}
+
+.table-winner {
+    font-weight: 900;
+    font-size: 25px;
+    color: rgb(117, 76, 0);
+    height: 40px;
+    /* A div do Empate estava ficando menor que os outros */
+}
+
+.table-view-game {
+    width: 150px;
+    height: 30px;
+    color: #32205f;
+    background-color: white;
+    border: solid 1px #32205f;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 12px;
+    cursor: pointer;
+    transition: ease 0.3s;
+}
+
+.table-view-game:hover {
+    background-color: #bee41e;
+    border: solid 1px #bee41e;
+}
+
+.table-delete-game {
+    width: 25px;
+    cursor: pointer;
+    transition: filter 0.3s;
+}
+
+.table-delete-game:hover {
+    filter: brightness(0.7);
+}
+
 .div-game-state {
     align-self: flex-start;
     top: 30%;
@@ -202,7 +255,7 @@ function setColorGameWinners() {
     transition: ease 0.2s;
 }
 
-.game-blackscreen {
+.blackscreen {
     z-index: 50;
     position: fixed;
     top: 0;
@@ -215,66 +268,8 @@ function setColorGameWinners() {
     pointer-events: none;
 }
 
-.game-blackscreen.visible {
+.blackscreen.visible {
     opacity: 1;
     pointer-events: auto;
 }
-
-.table-view-game {
-    width: 150px;
-    height: 30px;
-    color: #32205f;
-    background-color: white;
-    border: solid 1px #32205f;
-    border-radius: 10px;
-    font-weight: 600;
-    font-size: 12px;
-    cursor: pointer;
-    transition: ease 0.3s;
-}
-
-.table-view-game:hover {
-    background-color: #bee41e;
-    border: solid 1px #bee41e;
-}
-
-.table-delete-game {
-    width: 25px;
-    cursor: pointer;
-    transition: filter 0.3s;
-}
-
-.table-delete-game:hover {
-    filter: brightness(0.7);
-}
-
-.div-table-games {
-    width: 100vw;
-    padding-bottom: 20px; /* Adiciona espaço entre a tabela e o rodapé */
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-}
-
-.table-main {
-    width: 60%;
-    border: solid 2px #32205f;
-    border-radius: 20px;
-    padding: 20px;
-    border-spacing: 0 15px;
-    /* Adiciona espaço entre as linhas da tabela */
-}
-
-.table-winner {
-    font-weight: 900;
-    font-size: 25px;
-    height: 40px;
-    /* A div do Empate estava ficando menor que os outros */
-}
-
-.table-rows {}
-
-.table-first-row {}
-
-.table-game-row {}
 </style>

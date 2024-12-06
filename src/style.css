@@ -29,20 +29,23 @@ button {
 }
 
 /* Estilização de botões que estavam anteriormente apenas em Header.vue */
-.game-button-new{
+.game-button-new {
   background-color: white;
   color: #32205f;
 }
-.game-button-table{
+
+.game-button-table {
   background-color: #32205f;
   color: white;
 }
-.buttons:hover{
+
+.buttons:hover {
   background-color: #bee41e;
   border: solid 2px #bee41e;
   color: #32205f;
 }
-.buttons{
+
+.buttons {
   transition: ease 0.3s;
   font-size: 15px;
   font-weight: 600;
@@ -54,29 +57,3 @@ button {
   border-radius: 32px;
   cursor: pointer;
 }
-
-
-/* h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-} */

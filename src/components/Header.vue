@@ -23,18 +23,6 @@
 </template>
 
 <style scoped>
-.logo-capim{
-    /* width: 100vw; */
-}
-.nav-equality{
-    width: 300px;
-}
-
-.game-options{
-    width: 300px;
-    display: flex;
-    gap: 20px;
-}
 .navbar {
     display: flex;
     justify-content: space-around;
@@ -47,13 +35,27 @@
     z-index: 10;
     margin-bottom: 20px;
 }
+
+.nav-equality {
+    width: 300px;
+}
+
+.logo-capim {}
+
 .game-title {
     font-size: 2.2rem;
     font-weight: 600;
     cursor: pointer;
     transition: ease 0.2s;
 }
+
 .game-title:hover {
     filter: drop-shadow(0 0 40px #b7e6ff);
+}
+
+.game-options {
+    width: 300px;
+    display: flex;
+    gap: 20px;
 }
 </style>

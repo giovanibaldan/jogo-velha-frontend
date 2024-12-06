@@ -7,32 +7,31 @@ const cells = ref([])
 const gameState = ref(Array(9).fill(''))
 const winner = ref('')
 
-const GAME_STATES = {
+const GAME_STATES = { // Mapper - Usar em verificações no lugar de strings soltas
     draw: 'Empate',
-    xWin: 'X',
-    oWin: 'O'
+    winX: 'X',
+    winO: 'O'
 }
 
 onMounted(() => {
     cells.value = document.querySelectorAll('.game-cell')
 })
 
-async function saveGame() {
+async function saveGame() { // Tentar transformar as duas funções em uma
     try {
-        const response = await fetch (`http://localhost:3000/games`, {
+        const response = await fetch(`http://localhost:3000/games`, {
             method: 'POST'
         })
         const data = await response.json()
-        // console.log('Jogo criado', data)
         await saveGameData(data.id)
-    } catch (error){
+    } catch (error) {
         console.log('Erro no fetch:', error)
     }
 }
 
-async function saveGameData(id){
+async function saveGameData(id) {
     try {
-        const response = await fetch (`http://localhost:3000/games/${id}`, {
+        const response = await fetch(`http://localhost:3000/games/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -43,8 +42,7 @@ async function saveGameData(id){
             })
         })
         const data = await response.json()
-        // console.log('Jogo atualizado:', data)
-    } catch (error){
+    } catch (error) {
         console.log('Erro no fetch:', error)
     }
 }
@@ -83,13 +81,12 @@ function resetGame() {
     winner.value = ''
 }
 
-// Verificação de vencedor (Feito no back-end em Ruby anteriormente)
+// Função principal para verificar o vencedor
 function verifyWinner() {
     verifyColumn()
     verifyRow()
     verifyDiagonal()
     verifyDraw()
-    verifyAbandoned() // Verificar se ainda vai ser necessário
     if (winner.value !== '') {
         openWindowFinishedGame()
         saveGame()
@@ -97,22 +94,14 @@ function verifyWinner() {
     } else {
         console.log('Verificando vencedor:', gameState.value)
     }
-    }
-
-// Verificar se ainda vai ser necessário
-function verifyAbandoned() {
-    if (gameState.value.filter(cell => cell !== '').length < 5) {
-        winner.value = ''
-        return true
-    }
 }
 
+// Inicio das lógicas de verificação de vencedor
 function verifyDraw() {
     if (winner.value === '' && gameState.value.every(cell => cell !== '')) {
-        winner.value = GAME_STATES['draw']
+        winner.value = GAME_STATES['draw'] // Testando Mapper
     }
 }
-
 function verifyColumn() {
     for (let i = 0; i < 3; i++) {
         if (gameState.value[i] === gameState.value[i + 3] && gameState.value[i] === gameState.value[i + 6] && gameState.value[i] !== '') {
@@ -120,7 +109,6 @@ function verifyColumn() {
         }
     }
 }
-
 function verifyRow() {
     for (let i = 0; i < 3; i++) {
         if (gameState.value[i * 3] === gameState.value[i * 3 + 1] && gameState.value[i * 3] === gameState.value[i * 3 + 2] && gameState.value[i * 3] !== '') {
@@ -128,7 +116,6 @@ function verifyRow() {
         }
     }
 }
-
 function verifyDiagonal() {
     if (gameState.value[0] === gameState.value[4] && gameState.value[0] === gameState.value[8] && gameState.value[0] !== '') {
         winner.value = gameState.value[0]
@@ -136,34 +123,50 @@ function verifyDiagonal() {
         winner.value = gameState.value[2]
     }
 }
+// Fim
 
+// Funções para abrir e fechar a tela de fim de jogo
 function openWindowFinishedGame() {
     document.querySelector('.game-finished-div').style.display = 'flex'
-    // document.querySelector('.game-blackscreen').style.display = 'block'
-    const blackscreen = document.querySelector('.game-blackscreen')
+    const blackscreen = document.querySelector('.blackscreen')
     blackscreen.classList.add('visible')
 }
-
 function closeWindowFinishedGame() {
     document.querySelector('.game-finished-div').style.display = 'none'
-    // document.querySelector('.game-blackscreen').style.display = 'none'
-    const blackscreen = document.querySelector('.game-blackscreen')
+    const blackscreen = document.querySelector('.blackscreen')
     blackscreen.classList.remove('visible')
 }
-
 function handleFinishedNewGame() {
     resetGame()
     closeWindowFinishedGame()
 }
-
+// Fim
 
 </script>
 
 <template>
     <div class="game-div">
 
-        <div class="game-blackscreen"></div>
+        <!-- Tabela do jogo -->
+        <table class="game-table">
+            <tr class="game-row" id="row-1">
+                <td class="game-cell" id="cell-0" @click="setPlay($event.target, 0)"></td>
+                <td class="game-cell" id="cell-1" @click="setPlay($event.target, 1)"></td>
+                <td class="game-cell" id="cell-2" @click="setPlay($event.target, 2)"></td>
+            </tr>
+            <tr class="game-row" id="row-2">
+                <td class="game-cell" id="cell-3" @click="setPlay($event.target, 3)"></td>
+                <td class="game-cell" id="cell-4" @click="setPlay($event.target, 4)"></td>
+                <td class="game-cell" id="cell-5" @click="setPlay($event.target, 5)"></td>
+            </tr>
+            <tr class="game-row" id="row-3">
+                <td class="game-cell" id="cell-6" @click="setPlay($event.target, 6)"></td>
+                <td class="game-cell" id="cell-7" @click="setPlay($event.target, 7)"></td>
+                <td class="game-cell" id="cell-8" @click="setPlay($event.target, 8)"></td>
+            </tr>
+        </table>
 
+        <!-- Tela de jogo finalizado -->
         <div class='game-finished-div'>
             <nav class="game-finished-nav">
                 <button class="game-finished-close" @click="closeWindowFinishedGame()">X</button>
@@ -185,47 +188,41 @@ function handleFinishedNewGame() {
             </div>
         </div>
 
-        <table class="game-table">
-            <tr class="game-row" id="row-1">
-                <td class="game-cell" id="cell-0" @click="setPlay($event.target, 0)"></td>
-                <td class="game-cell" id="cell-1" @click="setPlay($event.target, 1)"></td>
-                <td class="game-cell" id="cell-2" @click="setPlay($event.target, 2)"></td>
-            </tr>
-            <tr class="game-row" id="row-2">
-                <td class="game-cell" id="cell-3" @click="setPlay($event.target, 3)"></td>
-                <td class="game-cell" id="cell-4" @click="setPlay($event.target, 4)"></td>
-                <td class="game-cell" id="cell-5" @click="setPlay($event.target, 5)"></td>
-            </tr>
-            <tr class="game-row" id="row-3">
-                <td class="game-cell" id="cell-6" @click="setPlay($event.target, 6)"></td>
-                <td class="game-cell" id="cell-7" @click="setPlay($event.target, 7)"></td>
-                <td class="game-cell" id="cell-8" @click="setPlay($event.target, 8)"></td>
-            </tr>
-        </table>
-        
+        <!-- Tela preta de fundo -->
+        <div class="blackscreen"></div>
+
     </div>
     <button class="game-reset" @click="resetGame">Recomeçar Partida</button>
 </template>
 
 <style scoped>
-.game-blackscreen{
-    z-index: 100;
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.6);
-    opacity: 0;
-    transition: opacity 0.5s;
-    pointer-events: none;
+.game-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-.game-blackscreen.visible{
-    opacity: 1;
-    pointer-events: auto;
+
+.game-table {
+    border-collapse: collapse;
 }
-.game-finished-winner {
-    font-size: 20px;
-    font-weight: 600;
+
+.game-row {}
+
+.game-cell {
+    width: 200px;
+    height: 200px;
+    border: solid 5px black;
+    font-size: 130px;
+    font-weight: 900;
+    cursor: pointer;
+    user-select: none;
+    transition: ease 0.2s;
 }
+
+.game-cell:hover {
+    background-color: #e0e8e9;
+}
+
 .game-finished-div {
     z-index: 100;
     position: fixed;
@@ -237,6 +234,7 @@ function handleFinishedNewGame() {
     flex-direction: column;
     justify-content: center;
 }
+
 .game-finished-nav {
     display: flex;
     justify-content: flex-end;
@@ -255,13 +253,20 @@ function handleFinishedNewGame() {
     background-color: white;
     transition: ease 0.3s;
 }
-.game-finished-close:hover{
+
+.game-finished-title {
+    margin: 0;
+}
+
+
+.game-finished-close:hover {
     background-color: rgb(250, 250, 250);
     box-shadow: none;
 }
 
-.game-finished-title {
-    margin: 0;
+.game-finished-winner {
+    font-size: 20px;
+    font-weight: 600;
 }
 
 .game-finished-buttons-div {
@@ -273,10 +278,12 @@ function handleFinishedNewGame() {
     margin-bottom: 20px;
 }
 
+/* Todos estão no style.css global
+.buttons{}
+.game-button-new{}
+.game-button-table{} */
+
 .game-reset {
-    /* position: absolute;
-    top: 50vh;
-    right: 20vw; */
     transition: ease 0.3s;
     font-size: 15px;
     font-weight: 600;
@@ -295,32 +302,23 @@ function handleFinishedNewGame() {
     background-color: rgba(255, 0, 0, 0.3);
 }
 
-.game-div {
-    /* margin-top: 20px; */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.blackscreen {
+    z-index: 100;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    transition: opacity 0.5s;
+    pointer-events: none;
 }
 
-.game-table {
-    border-collapse: collapse;
+.blackscreen.visible {
+    opacity: 1;
+    pointer-events: auto;
 }
 
-.game-cell {
-    width: 200px;
-    height: 200px;
-    border: solid 5px black;
-    font-size: 130px;
-    font-weight: 900;
-    cursor: pointer;
-    user-select: none;
-    transition: ease 0.2s;
-}
-
-.game-cell:hover {
-    background-color: #e0e8e9;
-}
-
+/* Estilização para fazer a interface famosa do jogo da velha */
 #cell-0,
 #cell-1,
 #cell-2 {
