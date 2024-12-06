@@ -17,22 +17,10 @@ onMounted(() => {
     cells.value = document.querySelectorAll('.game-cell')
 })
 
-async function saveGame() { // Tentar transformar as duas funções em uma
+async function saveGame() {
     try {
         const response = await fetch(`http://localhost:3000/games`, {
-            method: 'POST'
-        })
-        const data = await response.json()
-        await saveGameData(data.id)
-    } catch (error) {
-        console.log('Erro no fetch:', error)
-    }
-}
-
-async function saveGameData(id) {
-    try {
-        const response = await fetch(`http://localhost:3000/games/${id}`, {
-            method: 'PUT',
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -42,6 +30,7 @@ async function saveGameData(id) {
             })
         })
         const data = await response.json()
+        console.log('Jogo salvo com sucesso:', data)
     } catch (error) {
         console.log('Erro no fetch:', error)
     }
