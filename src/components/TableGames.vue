@@ -101,7 +101,7 @@ function setColorGameWinners() {
     <div class="div-table-games">
 
         <div class="game-blackscreen"></div>
-        
+
         <table class="table-main">
             <tr class="table-rows table-first-row">
                 <th>ID da Partida</th>
@@ -128,7 +128,7 @@ function setColorGameWinners() {
                 <div class="board-game-row" v-for="(row, rowIndex) in [0, 1, 2]" :key="rowIndex">
                     <div class="board-game-cell"
                         v-for="(cell, cellIndex) in gameState.slice(rowIndex * 3, rowIndex * 3 + 3)" :key="cellIndex">{{
-                        cell }}</div>
+                            cell }}</div>
                 </div>
             </div>
         </div>
@@ -137,7 +137,7 @@ function setColorGameWinners() {
 
 <style scoped>
 .div-game-state {
-    align-self: flex-start  ; /* Arrumar aqui */
+    align-self: flex-start;
     top: 30%;
     left: 50;
     z-index: 100;
@@ -250,9 +250,10 @@ function setColorGameWinners() {
 
 .div-table-games {
     width: 100vw;
-    height: 100vh;
+    padding-bottom: 20px; /* Adiciona espaço entre a tabela e o rodapé */
     display: flex;
     justify-content: center;
+    align-items: flex-start;
 }
 
 .table-main {
