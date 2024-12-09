@@ -70,8 +70,6 @@ function closeGameState() {
 }
 // Fim
 
-
-
 // Função para setar as cores dos vencedores e modificar o tamanho da fonte do Empate
 function setColorGameWinners() {
     gameWinners.value = document.querySelectorAll('.table-winner')
@@ -91,7 +89,7 @@ function setColorGameWinners() {
 export let rematchState = ref(false)
 export let rematchId = ref("")
 
-export function playRematch(id) {
+function playRematch(id) {
     rematchId.value = id
     rematchState.value = true
 }
@@ -134,7 +132,7 @@ export function playRematch(id) {
                 <div class="board-game-row" v-for="(rowIndex) in [0, 1, 2]" :key="rowIndex">
                     <div class="board-game-cell"
                         v-for="(cell, cellIndex) in gameState.slice(rowIndex * 3, rowIndex * 3 + 3)" :key="cellIndex">{{
-                            cell }}</div>
+                        cell }}</div>
                 </div>
             </div>
         </div>

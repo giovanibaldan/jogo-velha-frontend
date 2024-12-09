@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import { playRematch, rematchState, rematchId } from './TableGames.vue';
+import { rematchState, rematchId } from './TableGames.vue';
 console.log("Inicio do console em Game.vue")
 
 let playCounter = ref(0)
