@@ -1,6 +1,7 @@
 <script setup>
-console.log("Inicio do console em Game.vue")
 import { ref, onMounted } from 'vue'
+import { playRematch, rematchState, rematchId } from './TableGames.vue';
+console.log("Inicio do console em Game.vue")
 
 let playCounter = ref(0)
 const cells = ref([])
@@ -15,7 +16,29 @@ const GAME_STATES = { // Mapper - Usar em verificações no lugar de strings sol
 
 onMounted(() => {
     cells.value = document.querySelectorAll('.game-cell')
+    // let gameRematchId = rematchId.value
+    let rematchStateValue = rematchState.value
 })
+
+async function saveRematch(){
+    try {
+        let gameRematchId = rematchId.value
+        const response = await fetch(`http://localhost:3000/games/${gameRematchId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                game_state: gameState.value,
+                winner: winner.value
+            })
+        })
+        const data = await response.json()
+        console.log('Revanche realizada:', data)
+    } catch (error) {
+        console.log('Erro no fetch:', error)
+    }
+}
 
 async function saveGame() {
     try {
@@ -30,7 +53,7 @@ async function saveGame() {
             })
         })
         const data = await response.json()
-        console.log('Jogo salvo com sucesso:', data)
+        console.log('Novo jogo salvo com sucesso:', data)
     } catch (error) {
         console.log('Erro no fetch:', error)
     }
@@ -76,7 +99,12 @@ function verifyWinner() {
     verifyRow()
     verifyDiagonal()
     verifyDraw()
-    if (winner.value !== '') {
+    if (rematchState.value === true && winner.value !== '') {
+        openWindowFinishedGame()
+        saveRematch()
+        rematchState.value = false
+        rematchId.value = ''
+    } else if (winner.value !== '') {
         openWindowFinishedGame()
         saveGame()
         console.log('Jogo finalizado:', gameState.value)
@@ -161,10 +189,13 @@ function handleFinishedNewGame() {
                 <button class="game-finished-close" @click="closeWindowFinishedGame()">X</button>
             </nav>
             <h1 class="game-finished-title">Jogo finalizado!</h1>
-            <div v-if="winner === 'X' || winner === 'O'">
-                <p class="game-finished-winner">Vencedor: {{ winner }}</p>
+            <div v-if="rematchState == true && winner !== ''">
+                <p class="game-finished-winner">Vencedor da revanche: {{ winner }}</p>
             </div>
-            <div v-if="winner === GAME_STATES['draw']">
+            <div v-else-if="winner === 'X' || winner === 'O'">
+                <p class="game-finished-winner">Vencedor da partida: {{ winner }}</p>
+            </div>
+            <div v-else-if="winner === GAME_STATES['draw']">
                 <p class="game-finished-winner">Empate</p>
             </div>
             <div class="game-finished-buttons-div" v-if="winner !== ''">

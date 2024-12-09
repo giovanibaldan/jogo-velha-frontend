@@ -1,6 +1,6 @@
 <script setup>
-console.log("Inicio do console em TableGames.vue")
 import { ref, onMounted } from 'vue'
+console.log("Inicio do console em TableGames.vue")
 
 const gameWinners = ref([])
 const games = ref([])
@@ -70,6 +70,8 @@ function closeGameState() {
 }
 // Fim
 
+
+
 // Função para setar as cores dos vencedores e modificar o tamanho da fonte do Empate
 function setColorGameWinners() {
     gameWinners.value = document.querySelectorAll('.table-winner')
@@ -83,7 +85,16 @@ function setColorGameWinners() {
         }
     })
 }
+</script>
 
+<script>
+export let rematchState = ref(false)
+export let rematchId = ref("")
+
+export function playRematch(id) {
+    rematchId.value = id
+    rematchState.value = true
+}
 </script>
 
 <template>
@@ -95,7 +106,8 @@ function setColorGameWinners() {
                 <th>ID da Partida</th>
                 <th>Data</th>
                 <th>Vencedor</th>
-                <th>Estado Final da Partida</th>
+                <th>Detalhes da partida</th>
+                <th>Revanche</th>
                 <th>Deletar partida</th>
             </tr>
             <tr v-for="game in games" :key="game.id" class="table-rows table-game-row">
@@ -103,18 +115,23 @@ function setColorGameWinners() {
                 <td>{{ game.date }}</td>
                 <td class="table-winner">{{ game.winner }}</td>
                 <td><button class="table-view-game" @click="showGameState(game.id)">Ver resultado do jogo</button></td>
+                <td>
+                    <router-link to="/game">
+                        <button class="table-rematch" @click="playRematch(game.id)">Pedir revanche</button>
+                    </router-link>
+                </td>
                 <td><img class="table-delete-game" src="../assets/images/icon-delete.png" alt="Deletar Partida"
                         @click="deleteGame(game.id)"></td>
             </tr>
         </table>
 
-        <!-- Estado final da partida -->
+        <!-- Janela final da partida -->
         <div v-if="gameState" class="div-game-state">
             <nav class="nav-game-state">
                 <button class="close-game-state" @click="closeGameState()">X</button>
             </nav>
             <div class="board-game-state">
-                <div class="board-game-row" v-for="(row, rowIndex) in [0, 1, 2]" :key="rowIndex">
+                <div class="board-game-row" v-for="(rowIndex) in [0, 1, 2]" :key="rowIndex">
                     <div class="board-game-cell"
                         v-for="(cell, cellIndex) in gameState.slice(rowIndex * 3, rowIndex * 3 + 3)" :key="cellIndex">{{
                             cell }}</div>
@@ -139,7 +156,7 @@ function setColorGameWinners() {
 }
 
 .table-main {
-    width: 60%;
+    width: 70%;
     border: solid 2px #32205f;
     border-radius: 20px;
     padding: 20px;
@@ -174,9 +191,24 @@ function setColorGameWinners() {
     transition: ease 0.3s;
 }
 
-.table-view-game:hover {
+.table-view-game:hover,
+.table-rematch:hover {
     background-color: #bee41e;
     border: solid 1px #bee41e;
+    color: #32205f;
+}
+
+.table-rematch {
+    width: 110px;
+    height: 30px;
+    color: #ffffff;
+    background-color: #32205f;
+    border: solid 1px #32205f;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 12px;
+    cursor: pointer;
+    transition: ease 0.3s;
 }
 
 .table-delete-game {
