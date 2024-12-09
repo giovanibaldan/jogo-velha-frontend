@@ -30,7 +30,8 @@ async function saveRematch(){
             },
             body: JSON.stringify({
                 game_state: gameState.value,
-                winner: winner.value
+                winner: winner.value,
+                update_at: new Date()
             })
         })
         const data = await response.json()

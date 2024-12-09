@@ -22,7 +22,7 @@ async function indexGames() {
         const data = await response.json() // Ordena os jogos pelo ID em ordem crescente
         games.value = data.sort((b, a) => a.id - b.id)
         games.value.forEach(game => { // Cria o atributo .date para game e formata a data para DD/MM/YYYY
-            game.date = new Date(game.created_at).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' })
+            game.date = new Date(game.updated_at).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' })
         })
         console.log('Games:', games.value)
     } catch (error) {
@@ -147,7 +147,6 @@ function playRematch(id) {
 .div-table-games {
     width: 100vw;
     padding-bottom: 20px;
-    /* Adiciona espaço entre a tabela e o rodapé */
     display: flex;
     justify-content: center;
     align-items: flex-start;
