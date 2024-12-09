@@ -1,4 +1,20 @@
 <script>
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
+
+export default {
+    setup() {
+        const route = useRoute()
+
+        const isGameRoute = computed(() => route.path === '/game')
+        const isHomeRoute = computed(() => route.path === '/')
+
+        return {
+            isGameRoute,
+            isHomeRoute
+        }
+    }
+}
 </script>
 
 <template>
@@ -13,16 +29,23 @@
         </div>
         <div class="game-options">
             <router-link to="/game">
-                <button class="buttons game-button-new">Novo Jogo</button>
+                <button :class="['buttons', 'game-button-new', { 'selected': isGameRoute }]">Novo Jogo</button>
             </router-link>
             <router-link to="/">
-                <button class="buttons game-button-table">Histórico de Jogos</button>
+                <button :class="['buttons', 'game-button-table', { 'selected': isHomeRoute }]">Histórico de
+                    Jogos</button>
             </router-link>
         </div>
     </nav>
 </template>
 
 <style scoped>
+.buttons.selected {
+    background-color: #bee41e;
+    border: solid 2px #bee41e;
+    color: #32205f;
+}
+
 .navbar {
     display: flex;
     justify-content: space-around;

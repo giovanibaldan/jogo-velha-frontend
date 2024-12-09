@@ -18,8 +18,9 @@ body {
   display: flex;
   justify-content: center;
   text-align: center;
-  overflow-x: hidden;
   user-select: none;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 a,
