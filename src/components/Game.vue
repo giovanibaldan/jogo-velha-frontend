@@ -21,7 +21,7 @@ onMounted(() => {
     cells.value = document.querySelectorAll('.game-cell')
 })
 
-async function saveRematch(){
+async function saveRematch() {
     try {
         let gameRematchId = rematchId.value
         const response = await fetch(`http://localhost:3000/games/${gameRematchId}`, {
@@ -104,8 +104,10 @@ function verifyWinner() {
     if (rematchState.value === true && winner.value !== '') {
         openWindowFinishedGame()
         saveRematch()
-        rematchState.value = false
-        rematchId.value = ''
+            .then(() => {
+                rematchId.value = ''
+                rematchState.value = false
+            })
     } else if (winner.value !== '') {
         openWindowFinishedGame()
         saveGame()
@@ -144,14 +146,22 @@ function verifyDiagonal() {
 }
 // Fim
 
-// Funções para abrir e fechar a tela de fim de jogo
-function openWindowFinishedGame() {
-    windowEndGame.value = true
+function showBlackScreen() {
     blackscreen.classList.add('visible')
+}
+
+function hideBlackScreen() {
+    blackscreen.classList.remove('visible')
+}
+
+// Funções para abrir e fechar a tela de fim de jogo
+async function openWindowFinishedGame() {
+    windowEndGame.value = true
+    showBlackScreen()
 }
 function closeWindowFinishedGame() {
     windowEndGame.value = false
-    blackscreen.classList.remove('visible')
+    hideBlackScreen()
 }
 function handleFinishedNewGame() {
     resetGame()
@@ -189,7 +199,7 @@ function handleFinishedNewGame() {
                 <button class="new-window-button-close" @click="closeWindowFinishedGame()">X</button>
             </nav>
             <h1 class="new-window-title">Jogo finalizado!</h1>
-            <div v-if="rematchState == true && winner !== ''">
+            <div v-if="rematchState === true && winner !== ''">
                 <p class="game-finished-winner">Vencedor da revanche: {{ winner }}</p>
             </div>
             <div v-else-if="winner === 'X' || winner === 'O'">

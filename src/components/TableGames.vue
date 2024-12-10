@@ -63,39 +63,47 @@ async function getGameState(id) {
     }
 }
 
+function showBlackScreen() {
+    blackscreen.classList.add('visible')
+}
+
+function hideBlackScreen() {
+    blackscreen.classList.remove('visible')
+}
+
 // Funções para mostrar e fechar o estado final da partida
 function showGameState(id) {
     getGameState(id)
-    blackscreen.classList.add('visible')
+    showBlackScreen()
 }
 
 function closeGameState() {
     gameState.value = null
-    blackscreen.classList.remove('visible')
+    hideBlackScreen()
 }
 
 // Funções para mostrar e fechar a janela de confirmação de deleção de jogo
 function showDeleteGameWindow(id) {
     windowDelete.value = true
     gameId.value = id
-    blackscreen.classList.add('visible')
+    showBlackScreen()
 }
 
 function closeDeleteGameWindow() {
     windowDelete.value = false
-    blackscreen.classList.remove('visible')
+    hideBlackScreen()
 }
 
 // Funções para mostrar e fechar a janela de confirmação de revanche
 function showRematchWindow(id) {
     windowRematch.value = true
     gameId.value = id
-    blackscreen.classList.add('visible')
+    showBlackScreen()
 }
 
 function closeRematchWindow() {
     windowRematch.value = false
-    blackscreen.classList.remove('visible')
+    hideBlackScreen()
 }
 
 // Função para setar as cores dos vencedores e modificar o tamanho da fonte do Empate
