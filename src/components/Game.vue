@@ -8,6 +8,7 @@ const cells = ref([])
 const gameState = ref(Array(9).fill(''))
 const winner = ref('')
 const windowEndGame = ref(false)
+let blackscreen
 
 const GAME_STATES = { // Mapper - Usar em verificações no lugar de strings soltas
     draw: 'Empate',
@@ -16,6 +17,7 @@ const GAME_STATES = { // Mapper - Usar em verificações no lugar de strings sol
 }
 
 onMounted(() => {
+    blackscreen = document.querySelector('.blackscreen')
     cells.value = document.querySelectorAll('.game-cell')
 })
 
@@ -145,14 +147,10 @@ function verifyDiagonal() {
 // Funções para abrir e fechar a tela de fim de jogo
 function openWindowFinishedGame() {
     windowEndGame.value = true
-    // document.querySelector('.new-window-div').style.display = 'flex'
-    const blackscreen = document.querySelector('.blackscreen')
     blackscreen.classList.add('visible')
 }
 function closeWindowFinishedGame() {
     windowEndGame.value = false
-    // document.querySelector('.new-window-div').style.display = 'none'
-    const blackscreen = document.querySelector('.blackscreen')
     blackscreen.classList.remove('visible')
 }
 function handleFinishedNewGame() {
@@ -286,24 +284,6 @@ function handleFinishedNewGame() {
 
 .game-reset:hover {
     background-color: rgba(255, 0, 0, 0.3);
-}
-
-.blackscreen {
-    z-index: 50;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.6);
-    opacity: 0;
-    transition: opacity 0.5s;
-    pointer-events: none;
-}
-
-.blackscreen.visible {
-    opacity: 1;
-    pointer-events: auto;
 }
 
 /* Estilização para fazer a interface famosa do jogo da velha */

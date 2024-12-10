@@ -8,12 +8,15 @@ const gameState = ref(null)
 const gameId = ref('')
 const windowDelete = ref(false)
 const windowRematch = ref(false)
+let blackscreen
 
 onMounted(() => {
+    blackscreen = document.querySelector('.blackscreen')
     indexGames()
         .then(() => { // Aguarda a renderização para setar as cores dos vencedores (se não, a função não encontra os elementos)
             setColorGameWinners()
         })
+    
 })
 
 // Requisição para renderizar todos os jogos na tabela
@@ -63,27 +66,24 @@ async function getGameState(id) {
 // Funções para mostrar e fechar o estado final da partida
 function showGameState(id) {
     getGameState(id)
-    const blackscreen = document.querySelector('.blackscreen')
     blackscreen.classList.add('visible')
 }
 
 function closeGameState() {
     gameState.value = null
-    const blackscreen = document.querySelector('.blackscreen')
     blackscreen.classList.remove('visible')
 }
 
+    
 // Funções para mostrar e fechar a janela de confirmação de deleção de jogo
 function showDeleteGameWindow(id) {
     windowDelete.value = true
     gameId.value = id
-    const blackscreen = document.querySelector('.blackscreen')
     blackscreen.classList.add('visible')
 }
 
 function closeDeleteGameWindow() {
     windowDelete.value = false
-    const blackscreen = document.querySelector('.blackscreen')
     blackscreen.classList.remove('visible')
 }
 
@@ -91,13 +91,11 @@ function closeDeleteGameWindow() {
 function showRematchWindow(id) {
     windowRematch.value = true
     gameId.value = id
-    const blackscreen = document.querySelector('.blackscreen')
     blackscreen.classList.add('visible')
 }
 
 function closeRematchWindow() {
     windowRematch.value = false
-    const blackscreen = document.querySelector('.blackscreen')
     blackscreen.classList.remove('visible')
 }
 
@@ -275,8 +273,7 @@ function playRematch(id) {
 
 .div-game-state {
     align-self: flex-start;
-    top: 30%;
-    left: 50;
+    top: 20%;
     z-index: 100;
     position: fixed;
     width: 400px;
@@ -321,21 +318,4 @@ function playRematch(id) {
     transition: ease 0.2s;
 }
 
-.blackscreen {
-    z-index: 50;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.6);
-    opacity: 0;
-    transition: opacity 0.5s;
-    pointer-events: none;
-}
-
-.blackscreen.visible {
-    opacity: 1;
-    pointer-events: auto;
-}
 </style>
