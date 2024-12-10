@@ -29,6 +29,24 @@ button {
   cursor: pointer;
 }
 
+.whiteloading{
+  z-index: 1000;
+  position: fixed;
+  top: 10%;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: white;
+  opacity: 0;
+  transition: opacity 0.6s;
+  pointer-events: none;
+}
+
+.whiteloading.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
 .blackscreen {
   z-index: 50;
   position: fixed;

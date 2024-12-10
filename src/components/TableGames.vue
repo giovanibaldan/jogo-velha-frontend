@@ -11,13 +11,22 @@ const windowRematch = ref(false)
 let blackscreen
 
 onMounted(() => {
+    whiteLoading()
     blackscreen = document.querySelector('.blackscreen')
     indexGames()
         .then(() => { // Aguarda a renderização para setar as cores dos vencedores (se não, a função não encontra os elementos)
             setColorGameWinners()
         })
-
 })
+
+async function whiteLoading(){
+    let whiteloading
+    whiteloading = document.querySelector('.whiteloading')
+    whiteloading.classList.add('visible')
+    setTimeout(() => {
+        whiteloading.classList.remove('visible')
+    }, 0)
+}
 
 // Requisição para renderizar todos os jogos na tabela
 async function indexGames() {
@@ -132,6 +141,8 @@ function playRematch(id) {
 </script>
 
 <template>
+    <div class="whiteloading"></div>
+
     <div class="div-table-games">
 
         <!-- Tabela de histórico de jogos -->

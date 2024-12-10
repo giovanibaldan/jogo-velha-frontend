@@ -17,9 +17,19 @@ const GAME_STATES = { // Mapper - Usar em verificações no lugar de strings sol
 }
 
 onMounted(() => {
+    whiteLoading()
     blackscreen = document.querySelector('.blackscreen')
     cells.value = document.querySelectorAll('.game-cell')
 })
+
+async function whiteLoading(){
+    let whiteloading
+    whiteloading = document.querySelector('.whiteloading')
+    whiteloading.classList.add('visible')
+    setTimeout(() => {
+        whiteloading.classList.remove('visible')
+    }, 0)
+}
 
 async function saveRematch() {
     try {
@@ -174,6 +184,7 @@ function handleFinishedNewGame() {
 <template>
     <div class="game-div">
 
+        <div class="whiteloading"></div>
         <!-- Tabela do jogo -->
         <table class="game-table">
             <tr class="game-row" id="row-1">
