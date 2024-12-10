@@ -16,7 +16,7 @@ onMounted(() => {
         .then(() => { // Aguarda a renderização para setar as cores dos vencedores (se não, a função não encontra os elementos)
             setColorGameWinners()
         })
-    
+
 })
 
 // Requisição para renderizar todos os jogos na tabela
@@ -74,7 +74,6 @@ function closeGameState() {
     blackscreen.classList.remove('visible')
 }
 
-    
 // Funções para mostrar e fechar a janela de confirmação de deleção de jogo
 function showDeleteGameWindow(id) {
     windowDelete.value = true
@@ -142,9 +141,12 @@ function playRematch(id) {
                 <td>{{ game.date }}</td>
                 <td class="table-winner">{{ game.winner }}</td>
                 <td><button class="table-view-game" @click="showGameState(game.id)">Ver resultado do jogo</button></td>
-                <td><button class="table-rematch" @click="showRematchWindow(game.id)">Pedir revanche</button></td>   
-                <td><img class="table-delete-game" src="../assets/images/icon-delete.png" alt="Deletar Partida"
-                        @click="showDeleteGameWindow(game.id)"></td>
+                <td><button class="table-rematch" @click="showRematchWindow(game.id)">Pedir revanche</button></td>
+                <td class="table-delete-row">
+                    <div class="table-delete-game-div" @click="showDeleteGameWindow(game.id)">
+                        <img class="table-delete-game-img" src="../assets/images/icon-trash.png" alt="Deletar Partida">
+                    </div>
+                </td>
             </tr>
         </table>
 
@@ -261,14 +263,32 @@ function playRematch(id) {
     transition: ease 0.3s;
 }
 
-.table-delete-game {
-    width: 25px;
-    cursor: pointer;
-    transition: filter 0.3s;
+.table-delete-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.table-delete-game:hover {
-    filter: brightness(0.7);
+.table-delete-game-div {
+    height: 30px;
+    width: 60px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ec2300;
+    cursor: pointer;
+    transition: ease 0.3s;
+}
+
+.table-delete-game-div:hover {
+    filter: brightness(0.85);
+}
+
+.table-delete-game-img {
+    height: 18px;
+    cursor: pointer;
+    filter: invert();
 }
 
 .div-game-state {
@@ -317,5 +337,4 @@ function playRematch(id) {
     user-select: none;
     transition: ease 0.2s;
 }
-
 </style>
