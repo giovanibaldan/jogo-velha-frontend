@@ -30,7 +30,7 @@ button {
 }
 
 .new-window-div {
-  min-height: 200px;
+  min-height: 150px;
   z-index: 100;
   top: 30%;
   position: fixed;
@@ -38,7 +38,7 @@ button {
   border-radius: 10px;
   background-color: rgb(255, 255, 255);
   border: solid 3px black;
-  display: none;
+  display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;

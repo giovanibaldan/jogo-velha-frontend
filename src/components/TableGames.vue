@@ -6,6 +6,8 @@ const gameWinners = ref([])
 const games = ref([])
 const gameState = ref(null)
 const gameId = ref('')
+const windowDelete = ref(false)
+const windowRematch = ref(false)
 
 onMounted(() => {
     indexGames()
@@ -70,22 +72,33 @@ function closeGameState() {
     const blackscreen = document.querySelector('.blackscreen')
     blackscreen.classList.remove('visible')
 }
-// Fim
 
 // Funções para mostrar e fechar a janela de confirmação de deleção de jogo
 function showDeleteGameWindow(id) {
+    windowDelete.value = true
     gameId.value = id
     const blackscreen = document.querySelector('.blackscreen')
-    const newWindow = document.querySelector('.new-window-div')
     blackscreen.classList.add('visible')
-    newWindow.style.display = 'flex'
 }
 
 function closeDeleteGameWindow() {
+    windowDelete.value = false
     const blackscreen = document.querySelector('.blackscreen')
-    const newWindow = document.querySelector('.new-window-div')
     blackscreen.classList.remove('visible')
-    newWindow.style.display = 'none'
+}
+
+// Funções para mostrar e fechar a janela de confirmação de revanche
+function showRematchWindow(id) {
+    windowRematch.value = true
+    gameId.value = id
+    const blackscreen = document.querySelector('.blackscreen')
+    blackscreen.classList.add('visible')
+}
+
+function closeRematchWindow() {
+    windowRematch.value = false
+    const blackscreen = document.querySelector('.blackscreen')
+    blackscreen.classList.remove('visible')
 }
 
 // Função para setar as cores dos vencedores e modificar o tamanho da fonte do Empate
@@ -131,25 +144,37 @@ function playRematch(id) {
                 <td>{{ game.date }}</td>
                 <td class="table-winner">{{ game.winner }}</td>
                 <td><button class="table-view-game" @click="showGameState(game.id)">Ver resultado do jogo</button></td>
-                <td>
-                    <router-link to="/game">
-                        <button class="table-rematch" @click="playRematch(game.id)">Pedir revanche</button>
-                    </router-link>
-                </td>
+                <td><button class="table-rematch" @click="showRematchWindow(game.id)">Pedir revanche</button></td>   
                 <td><img class="table-delete-game" src="../assets/images/icon-delete.png" alt="Deletar Partida"
                         @click="showDeleteGameWindow(game.id)"></td>
             </tr>
         </table>
 
+        <!-- Janela de iniciar revanche -->
+        <div v-if="windowRematch" class="new-window-div">
+            <div class="new-window-nav">
+                <button class="new-window-button-close" @click="closeRematchWindow()">X</button>
+            </div>
+            <h1 class="new-window-title">Iniciar revanche?</h1>
+            <div class="new-window-buttons-div">
+                <router-link to="/game">
+                    <button class="new-window-button new-window-button-green"
+                        @click="playRematch(gameId)">Iniciar</button>
+                </router-link>
+                <button class="new-window-button new-window-button-red" @click="closeRematchWindow()">Cancelar</button>
+            </div>
+        </div>
+
         <!-- Janela de confirmar deleção de partida -->
-        <div class="new-window-div">
+        <div v-if="windowDelete" class="new-window-div">
             <div class="new-window-nav">
                 <button class="new-window-button-close" @click="closeDeleteGameWindow()">X</button>
             </div>
             <h1 class="new-window-title">Deseja realmente deletar essa partida?</h1>
             <div class="new-window-buttons-div">
                 <button class="new-window-button new-window-button-red" @click="deleteGame(gameId)">Deletar</button>
-                <button class="new-window-button new-window-button-green" @click="closeDeleteGameWindow()">Cancelar</button>
+                <button class="new-window-button new-window-button-green"
+                    @click="closeDeleteGameWindow()">Cancelar</button>
             </div>
         </div>
 
