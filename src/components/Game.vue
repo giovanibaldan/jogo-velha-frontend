@@ -7,6 +7,7 @@ let playCounter = ref(0)
 const cells = ref([])
 const gameState = ref(Array(9).fill(''))
 const winner = ref('')
+const windowEndGame = ref(false)
 
 const GAME_STATES = { // Mapper - Usar em verificações no lugar de strings soltas
     draw: 'Empate',
@@ -16,8 +17,6 @@ const GAME_STATES = { // Mapper - Usar em verificações no lugar de strings sol
 
 onMounted(() => {
     cells.value = document.querySelectorAll('.game-cell')
-    // let gameRematchId = rematchId.value
-    let rematchStateValue = rematchState.value
 })
 
 async function saveRematch(){
@@ -145,12 +144,14 @@ function verifyDiagonal() {
 
 // Funções para abrir e fechar a tela de fim de jogo
 function openWindowFinishedGame() {
-    document.querySelector('.new-window-div').style.display = 'flex'
+    windowEndGame.value = true
+    // document.querySelector('.new-window-div').style.display = 'flex'
     const blackscreen = document.querySelector('.blackscreen')
     blackscreen.classList.add('visible')
 }
 function closeWindowFinishedGame() {
-    document.querySelector('.new-window-div').style.display = 'none'
+    windowEndGame.value = false
+    // document.querySelector('.new-window-div').style.display = 'none'
     const blackscreen = document.querySelector('.blackscreen')
     blackscreen.classList.remove('visible')
 }
@@ -185,7 +186,7 @@ function handleFinishedNewGame() {
         </table>
 
         <!-- Tela de jogo finalizado -->
-        <div class='new-window-div'>
+        <div v-if="windowEndGame" class='new-window-div'>
             <nav class="new-window-nav">
                 <button class="new-window-button-close" @click="closeWindowFinishedGame()">X</button>
             </nav>
@@ -243,42 +244,6 @@ function handleFinishedNewGame() {
 .game-cell:hover {
     background-color: #e0e8e9;
 }
-
-/* .new-window-div {
-    z-index: 100;
-    position: fixed;
-    width: 20%;
-    border-radius: 10px;
-    background-color: rgb(255, 255, 255);
-    border: solid 3px black;
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.new-window-nav {
-    display: flex;
-    justify-content: flex-end;
-    padding: 5px;
-}
-
-.new-window-button-close {
-    border: none;
-    box-shadow: 1px 1px 1px 1px black;
-    border-radius: 5px;
-    width: 40px;
-    height: 30px;
-    font-weight: 900;
-    font-size: 20px;
-    color: red;
-    background-color: white;
-    transition: ease 0.3s;
-}
-
-.new-window-title {
-    margin: 0;
-} */
-
 
 .new-window-button-close:hover {
     background-color: rgb(250, 250, 250);
