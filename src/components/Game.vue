@@ -145,12 +145,12 @@ function verifyDiagonal() {
 
 // Funções para abrir e fechar a tela de fim de jogo
 function openWindowFinishedGame() {
-    document.querySelector('.game-finished-div').style.display = 'flex'
+    document.querySelector('.new-window-div').style.display = 'flex'
     const blackscreen = document.querySelector('.blackscreen')
     blackscreen.classList.add('visible')
 }
 function closeWindowFinishedGame() {
-    document.querySelector('.game-finished-div').style.display = 'none'
+    document.querySelector('.new-window-div').style.display = 'none'
     const blackscreen = document.querySelector('.blackscreen')
     blackscreen.classList.remove('visible')
 }
@@ -185,11 +185,11 @@ function handleFinishedNewGame() {
         </table>
 
         <!-- Tela de jogo finalizado -->
-        <div class='game-finished-div'>
-            <nav class="game-finished-nav">
-                <button class="game-finished-close" @click="closeWindowFinishedGame()">X</button>
+        <div class='new-window-div'>
+            <nav class="new-window-nav">
+                <button class="new-window-button-close" @click="closeWindowFinishedGame()">X</button>
             </nav>
-            <h1 class="game-finished-title">Jogo finalizado!</h1>
+            <h1 class="new-window-title">Jogo finalizado!</h1>
             <div v-if="rematchState == true && winner !== ''">
                 <p class="game-finished-winner">Vencedor da revanche: {{ winner }}</p>
             </div>
@@ -244,7 +244,7 @@ function handleFinishedNewGame() {
     background-color: #e0e8e9;
 }
 
-.game-finished-div {
+/* .new-window-div {
     z-index: 100;
     position: fixed;
     width: 20%;
@@ -256,13 +256,13 @@ function handleFinishedNewGame() {
     justify-content: center;
 }
 
-.game-finished-nav {
+.new-window-nav {
     display: flex;
     justify-content: flex-end;
     padding: 5px;
 }
 
-.game-finished-close {
+.new-window-button-close {
     border: none;
     box-shadow: 1px 1px 1px 1px black;
     border-radius: 5px;
@@ -275,12 +275,12 @@ function handleFinishedNewGame() {
     transition: ease 0.3s;
 }
 
-.game-finished-title {
+.new-window-title {
     margin: 0;
-}
+} */
 
 
-.game-finished-close:hover {
+.new-window-button-close:hover {
     background-color: rgb(250, 250, 250);
     box-shadow: none;
 }
@@ -296,7 +296,7 @@ function handleFinishedNewGame() {
     flex-direction: column;
     justify-content: center;
     gap: 10px;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
 }
 
 /* Todos estão no style.css global

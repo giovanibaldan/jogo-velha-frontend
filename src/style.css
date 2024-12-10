@@ -29,7 +29,86 @@ button {
   cursor: pointer;
 }
 
-/* Estilização de botões que estavam anteriormente apenas em Header.vue */
+.new-window-div {
+  min-height: 200px;
+  z-index: 100;
+  top: 30%;
+  position: fixed;
+  width: 20%;
+  border-radius: 10px;
+  background-color: rgb(255, 255, 255);
+  border: solid 3px black;
+  display: none;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding-bottom: 20px;
+}
+
+.new-window-nav {
+  display: flex;
+  justify-content: flex-end;
+  padding: 5px;
+  width: 100%;
+  padding-right: 4%;
+}
+
+.new-window-button-close {
+  border: none;
+  box-shadow: 1px 1px 1px 1px black;
+  border-radius: 5px;
+  width: 40px;
+  height: 30px;
+  font-weight: 900;
+  font-size: 20px;
+  color: red;
+  background-color: white;
+  transition: ease 0.3s;
+}
+
+.new-window-title {
+  margin: 0;
+  font-size: 30px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.new-window-buttons-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  gap: 20px;
+}
+
+.new-window-button {
+  transition: ease 0.3s;
+  font-size: 15px;
+  width: 120px;
+  font-weight: 600;
+  line-height: 100%;
+  margin-bottom: 0;
+  margin-top: 0;
+  padding: 14px;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.new-window-button:hover {
+  filter: brightness(1.2);
+}
+
+.new-window-button-green{
+  background-color: #008000;
+  color: white;
+}
+
+.new-window-button-red{
+  background-color: #ec2300;
+  color: white;
+}
+
 .game-button-new {
   background-color: white;
   color: #32205f;

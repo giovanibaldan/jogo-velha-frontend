@@ -5,6 +5,7 @@ console.log("Inicio do console em TableGames.vue")
 const gameWinners = ref([])
 const games = ref([])
 const gameState = ref(null)
+const gameId = ref('')
 
 onMounted(() => {
     indexGames()
@@ -38,6 +39,7 @@ async function deleteGame(id) {
         const data = await response.json()
         console.log('Jogo apagado:', data)
         indexGames()
+        closeDeleteGameWindow()
     } catch (error) {
         console.error('Fetch error:', error)
     }
@@ -69,6 +71,22 @@ function closeGameState() {
     blackscreen.classList.remove('visible')
 }
 // Fim
+
+// Funções para mostrar e fechar a janela de confirmação de deleção de jogo
+function showDeleteGameWindow(id) {
+    gameId.value = id
+    const blackscreen = document.querySelector('.blackscreen')
+    const newWindow = document.querySelector('.new-window-div')
+    blackscreen.classList.add('visible')
+    newWindow.style.display = 'flex'
+}
+
+function closeDeleteGameWindow() {
+    const blackscreen = document.querySelector('.blackscreen')
+    const newWindow = document.querySelector('.new-window-div')
+    blackscreen.classList.remove('visible')
+    newWindow.style.display = 'none'
+}
 
 // Função para setar as cores dos vencedores e modificar o tamanho da fonte do Empate
 function setColorGameWinners() {
@@ -119,20 +137,32 @@ function playRematch(id) {
                     </router-link>
                 </td>
                 <td><img class="table-delete-game" src="../assets/images/icon-delete.png" alt="Deletar Partida"
-                        @click="deleteGame(game.id)"></td>
+                        @click="showDeleteGameWindow(game.id)"></td>
             </tr>
         </table>
 
+        <!-- Janela de confirmar deleção de partida -->
+        <div class="new-window-div">
+            <div class="new-window-nav">
+                <button class="new-window-button-close" @click="closeDeleteGameWindow()">X</button>
+            </div>
+            <h1 class="new-window-title">Deseja realmente deletar esta partida?</h1>
+            <div class="new-window-buttons-div">
+                <button class="new-window-button new-window-button-red" @click="deleteGame(gameId)">Deletar</button>
+                <button class="new-window-button new-window-button-green" @click="closeDeleteGameWindow()">Cancelar</button>
+            </div>
+        </div>
+
         <!-- Janela final da partida -->
         <div v-if="gameState" class="div-game-state">
-            <nav class="nav-game-state">
-                <button class="close-game-state" @click="closeGameState()">X</button>
+            <nav class="board-game-state-nav">
+                <button class="new-window-button-close" @click="closeGameState()">X</button>
             </nav>
             <div class="board-game-state">
                 <div class="board-game-row" v-for="(rowIndex) in [0, 1, 2]" :key="rowIndex">
                     <div class="board-game-cell"
                         v-for="(cell, cellIndex) in gameState.slice(rowIndex * 3, rowIndex * 3 + 3)" :key="cellIndex">{{
-                        cell }}</div>
+                            cell }}</div>
                 </div>
             </div>
         </div>
@@ -234,28 +264,10 @@ function playRematch(id) {
     align-items: center;
 }
 
-.nav-game-state {
+.board-game-state-nav {
     display: flex;
     align-self: flex-end;
     padding: 5px;
-}
-
-.close-game-state {
-    border: none;
-    box-shadow: 1px 1px 1px 1px black;
-    border-radius: 5px;
-    width: 40px;
-    height: 30px;
-    font-weight: 900;
-    font-size: 20px;
-    color: red;
-    background-color: white;
-    transition: ease 0.3s;
-}
-
-.close-game-state:hover {
-    background-color: rgb(250, 250, 250);
-    box-shadow: none;
 }
 
 .board-game-state {
