@@ -146,7 +146,7 @@ function playRematch(id) {
             <div class="new-window-nav">
                 <button class="new-window-button-close" @click="closeDeleteGameWindow()">X</button>
             </div>
-            <h1 class="new-window-title">Deseja realmente deletar esta partida?</h1>
+            <h1 class="new-window-title">Deseja realmente deletar essa partida?</h1>
             <div class="new-window-buttons-div">
                 <button class="new-window-button new-window-button-red" @click="deleteGame(gameId)">Deletar</button>
                 <button class="new-window-button new-window-button-green" @click="closeDeleteGameWindow()">Cancelar</button>
