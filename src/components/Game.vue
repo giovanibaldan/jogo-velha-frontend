@@ -225,7 +225,7 @@ function handleFinishedNewGame() {
                 <router-link to="/game">
                     <button class="buttons game-button-new" @click="handleFinishedNewGame()">Novo Jogo</button>
                 </router-link>
-                <router-link to="/">
+                <router-link to="/history">
                     <button class="buttons game-button-table">Histórico de Jogos</button>
                 </router-link>
             </div>
