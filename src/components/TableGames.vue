@@ -161,7 +161,7 @@ function playRematch(id) {
         </table>
 
         <!-- Janela de iniciar revanche -->
-        <div v-if="windowRematch" class="new-window-div">
+        <div v-if="windowRematch" class="new-window-div fast-loading">
             <div class="new-window-nav">
                 <button class="new-window-button-close" @click="closeRematchWindow()">X</button>
             </div>
@@ -176,7 +176,7 @@ function playRematch(id) {
         </div>
 
         <!-- Janela de confirmar deleção de partida -->
-        <div v-if="windowDelete" class="new-window-div">
+        <div v-if="windowDelete" class="new-window-div fast-loading">
             <div class="new-window-nav">
                 <button class="new-window-button-close" @click="closeDeleteGameWindow()">X</button>
             </div>
@@ -189,7 +189,7 @@ function playRematch(id) {
         </div>
 
         <!-- Janela final da partida -->
-        <div v-if="gameState" class="div-game-state">
+        <div v-if="gameState" class="div-game-state fast-loading">
             <nav class="board-game-state-nav">
                 <button class="new-window-button-close" @click="closeGameState()">X</button>
             </nav>

@@ -196,7 +196,7 @@ function handleFinishedNewGame() {
         </table>
 
         <!-- Tela de jogo finalizado -->
-        <div v-if="windowEndGame" class='new-window-div'>
+        <div v-if="windowEndGame" class='new-window-div fast-loading'>
             <nav class="new-window-nav">
                 <button class="new-window-button-close" @click="closeWindowFinishedGame()">X</button>
             </nav>

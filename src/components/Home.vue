@@ -22,7 +22,6 @@
             </div>
             <div class="home-image-div animated-image">
                 <img src="../assets/images/home-image.jpg" alt="" class="home-image">
-                <p class="home-image-text"></p>
             </div>
         </div>
     </div>
@@ -93,8 +92,6 @@
     border-radius: 72% 28% 29% 71% / 22% 43% 57% 78%;
     box-shadow: 0px 1px 30px #32205fa4;
 }
-
-.home-image-text {}
 
 /* ANIMAÇÕES */
 @keyframes slideInFromRight {

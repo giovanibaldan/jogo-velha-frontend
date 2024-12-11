@@ -117,12 +117,12 @@ button {
   filter: brightness(1.2);
 }
 
-.new-window-button-green{
+.new-window-button-green {
   background-color: #008000;
   color: white;
 }
 
-.new-window-button-red{
+.new-window-button-red {
   background-color: #ec2300;
   color: white;
 }
@@ -159,14 +159,28 @@ button {
 /* ANIMAÇÕES */
 @keyframes loading {
   0% {
-      opacity: 0;
+    opacity: 0;
   }
 
   100% {
-      opacity: 100;
+    opacity: 100;
   }
 }
 
 .loading {
   animation: loading 1s ease;
+}
+
+@keyframes fast-loading {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 100;
+  }
+}
+
+.fast-loading{
+  animation: fast-loading 0.3s ease;
 }
