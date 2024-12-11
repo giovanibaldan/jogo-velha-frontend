@@ -2,7 +2,7 @@
 </script>
 
 <template>
-    <div class="home-page-div">
+    <div class="home-page-div loading">
         <nav class="home-nav">
             <img src="../assets/images/Logo_Blue.svg" alt="" class="home-nav-image">
         </nav>
@@ -97,14 +97,6 @@
 .home-image-text {}
 
 /* ANIMAÇÕES */
-.animated-content {
-    animation: slideInFromBottom 1s ease-out;
-}
-
-.animated-image {
-    animation: slideInFromRight 1s ease-out;
-}
-
 @keyframes slideInFromRight {
     0% {
         transform: translateX(5%);
@@ -127,5 +119,13 @@
         transform: translateY(0);
         opacity: 1;
     }
+}
+
+.animated-content {
+    animation: slideInFromBottom 1.5s ease-out;
+}
+
+.animated-image {
+    animation: slideInFromRight 1.5s ease-out;
 }
 </style>
