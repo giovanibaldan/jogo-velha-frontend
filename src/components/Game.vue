@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { rematchState, rematchId } from './TableGames.vue';
+import Header from './Header.vue';
 console.log("Inicio do console em Game.vue")
 
 let playCounter = ref(0)
@@ -182,6 +183,7 @@ function handleFinishedNewGame() {
 </script>
 
 <template>
+    <Header />
     <div class="game-div">
 
         <div class="whiteloading"></div>

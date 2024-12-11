@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue'
+import Header from './Header.vue';
 console.log("Inicio do console em TableGames.vue")
 
 const gameWinners = ref([])
@@ -141,6 +142,7 @@ function playRematch(id) {
 </script>
 
 <template>
+    <Header />
     <div class="whiteloading"></div>
 
     <div class="div-table-games">

@@ -7,11 +7,11 @@ export default {
         const route = useRoute()
 
         const isGameRoute = computed(() => route.path === '/game')
-        const isHomeRoute = computed(() => route.path === '/')
+        const isHistoryRoute = computed(() => route.path === '/history')
 
         return {
             isGameRoute,
-            isHomeRoute
+            isHistoryRoute
         }
     }
 }
@@ -31,8 +31,8 @@ export default {
             <router-link to="/game">
                 <button :class="['buttons', 'game-button-new', { 'selected': isGameRoute }]">Novo Jogo</button>
             </router-link>
-            <router-link to="/">
-                <button :class="['buttons', 'game-button-table', { 'selected': isHomeRoute }]">Histórico de
+            <router-link to="/history">
+                <button :class="['buttons', 'game-button-table', { 'selected': isHistoryRoute }]">Histórico de
                     Jogos</button>
             </router-link>
         </div>
