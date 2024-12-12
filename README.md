@@ -108,3 +108,29 @@ Isso irá iniciar o servidor de desenvolvimento, hospedando o projeto localmente
             <pre><b>Markdown</b></pre>
         </td>
   </table>
+</br>
+
+<h3 align="left"> Levantamento de Requisitos: </h3>
+<h4 align="left"> Requisitos Funcionais do Front-end: </h4>
+
+##### 1. Criar tabuleiro do jogo
+##### 2. Permitir que o tabuleiro seja jogado
+##### 3. Mostrar o histórico de jogos
+##### 4. Mostrar como foi um jogo específico
+##### 5. Possibilitar a exclusão de um jogo
+##### 6. Permitir o rematch do jogo
+##### 7. Conectar o front com o back
+##### Bônus 1: Implementar testes no front-end
+##### Bonus 2: Readme bonitinho
+</br>
+
+<h4 align="left"> Requisitos Funcionais do Back-end: </h4>
+
+##### 1. Criar CRUD para o model de Game
+##### 2. Configurar rotas para os métodos do CRUD
+##### Regras:
+    - Create: salvar o jogo no banco com quem ganhou (X ou O), e quando foi jogado
+    - Read: conseguir mostrar quem venceu o jogo, a data e (bônus) mostrar como ficou a tabuleiro
+    - Update: rematch do jogo, ou seja, que o jogo tenha uma revanche
+    - Delete: apagar o jogo do histórico
+##### Bônus 1: Implementar testes no back-end
