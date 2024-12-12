@@ -80,8 +80,8 @@ Isso irá iniciar o servidor de desenvolvimento, hospedando o projeto localmente
             <pre><b>Ruby</b></pre>
         </td>
        <td align="center">
-            <img src="https://skillicons.dev/icons?i=rubyonrails" width="65px" alt="C icon" /><br>
-            <pre><b>Ruby on Rails</b></pre>
+            <img src="https://skillicons.dev/icons?i=rails" width="65px" alt="C icon" /><br>
+            <pre><b>Rails</b></pre>
         </td>
        <td align="center">
             <img src="https://skillicons.dev/icons?i=git" width="65px" alt="C icon" /><br>
