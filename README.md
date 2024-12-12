@@ -133,4 +133,8 @@ Isso irá iniciar o servidor de desenvolvimento, hospedando o projeto localmente
     - Read: conseguir mostrar quem venceu o jogo, a data e (bônus) mostrar como ficou a tabuleiro
     - Update: rematch do jogo, ou seja, que o jogo tenha uma revanche
     - Delete: apagar o jogo do histórico
+##### 3. Realizar a API com Rails
+##### 4. Criar e subir o banco de dados com PostgreSQL
+##### 5. Estrutura a infra com Docker
+##### 6. Realizar o versionamento de código pelo GIT
 ##### Bônus 1: Implementar testes no back-end
