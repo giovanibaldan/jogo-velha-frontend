@@ -123,3 +123,18 @@ Isso irá iniciar o servidor de desenvolvimento, hospedando o projeto localmente
 ##### Bônus 1: Implementar testes no front-end
 ##### Bonus 2: Readme bonitinho
 </br>
+
+### Funcionamento da página:
+#### Tela inicial:
+<img src="https://github.com/user-attachments/assets/f86d334c-a9a3-4801-9482-ddcc2b2b936a"/>
+<br>
+
+#### Tela do jogo:
+<img src="https://github.com/user-attachments/assets/ed865a13-861a-49a2-842c-d15bd5c80bef"/>
+<br>
+
+#### Tela do histórico de jogos:
+<img src="https://github.com/user-attachments/assets/36c7af9f-b457-4ddd-87bb-a0da9ce7179b"/>
+<br>
+
+<br>
