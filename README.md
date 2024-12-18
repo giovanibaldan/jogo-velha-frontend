@@ -123,18 +123,3 @@ Isso irá iniciar o servidor de desenvolvimento, hospedando o projeto localmente
 ##### Bônus 1: Implementar testes no front-end
 ##### Bonus 2: Readme bonitinho
 </br>
-
-<h4 align="left"> Requisitos Funcionais do Back-end: </h4>
-
-##### 1. Criar CRUD para o model de Game
-##### 2. Configurar rotas para os métodos do CRUD
-##### Regras:
-    - Create: salvar o jogo no banco com quem ganhou (X ou O), e quando foi jogado
-    - Read: conseguir mostrar quem venceu o jogo, a data e (bônus) mostrar como ficou a tabuleiro
-    - Update: rematch do jogo, ou seja, que o jogo tenha uma revanche
-    - Delete: apagar o jogo do histórico
-##### 3. Realizar a API com Rails
-##### 4. Criar e subir o banco de dados com PostgreSQL
-##### 5. Estrutura a infra com Docker
-##### 6. Realizar o versionamento de código pelo GIT
-##### Bônus 1: Implementar testes no back-end
