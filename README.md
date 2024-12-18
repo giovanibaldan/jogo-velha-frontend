@@ -37,7 +37,7 @@ Nas duas páginas principais, Game (o tabuleiro do jogo) e TableGames (o histór
 
 #### 3. Instalação das Dependências:
 
-* Navegue até o diretório do projeto, \apiGithub, usando o terminal.
+* Navegue até o diretório do projeto, /jogo-velha-frontend, usando o terminal.
 * Execute um dos seguintes comandos para instalar as dependências necessárias: </br> </br>
 `npm install` ou `yarn install`
 </br> </br>
