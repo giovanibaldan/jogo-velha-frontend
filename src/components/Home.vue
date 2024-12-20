@@ -9,8 +9,7 @@
         <div class="home-body">
             <div class="home-content animated-content">
                 <h1 class="home-title">JOGO DA VELHA</h1>
-                <h3 class="home-desc">Projeto desenvolvido para o treinamento do primeiro contato com a stack de
-                    desenvolvimento da Capim</h3>
+                <h3 class="home-desc">Projeto desenvolvido para o treinamento do primeiro contato com a stack de desenvolvimento da Capim</h3>
                 <div class="home-buttons-div">
                     <router-link to="/game">
                         <button class="buttons game-button-new home-buttons">Novo Jogo</button>

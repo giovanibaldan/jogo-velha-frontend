@@ -3,7 +3,7 @@ import Game from '../components/Game.vue'
 import TableGames from '../components/TableGames.vue'
 import Home from '../components/Home.vue'
 
-const routes = [
+export const routes = [
     {
         path: '/',
         name: "Home",
