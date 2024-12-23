@@ -1,5 +1,7 @@
 <h1 align="center"> Jogo da Velha <img align='center' width='100px' height='100px' src="https://github.com/user-attachments/assets/980d9e00-b40c-4bb0-8489-67604e06dc06" /> </h1> 
 
+Veja o repositório do backend [clicando aqui](https://github.com/giovanibaldan/jogo-velha-backend)
+
 <h3 align="left">
   Sobre o projeto:
 </h3>
