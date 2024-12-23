@@ -137,4 +137,8 @@ Isso irá iniciar o servidor de desenvolvimento, hospedando o projeto localmente
 <img src="https://github.com/user-attachments/assets/36c7af9f-b457-4ddd-87bb-a0da9ce7179b"/>
 <br>
 
+### Resultado dos testes
+<img width="776px" src="https://github.com/user-attachments/assets/247d4449-2d9b-4db5-94fb-3a20316196e1"/>
+<br>
+
 <br>
