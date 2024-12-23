@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import Header from './Header.vue';
-console.log("Inicio do console em TableGames.vue")
+console.log("Inicio do console em History.vue")
 
 const gameWinners = ref([])
 const games = ref([])
