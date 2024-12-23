@@ -110,20 +110,6 @@ Isso irá iniciar o servidor de desenvolvimento, hospedando o projeto localmente
   </table>
 </br>
 
-<h3 align="left"> Levantamento de Requisitos: </h3>
-<h4 align="left"> Requisitos Funcionais do Front-end: </h4>
-
-##### 1. Criar tabuleiro do jogo
-##### 2. Permitir que o tabuleiro seja jogado
-##### 3. Mostrar o histórico de jogos
-##### 4. Mostrar como foi um jogo específico
-##### 5. Possibilitar a exclusão de um jogo
-##### 6. Permitir o rematch do jogo
-##### 7. Conectar o front com o back
-##### Bônus 1: Implementar testes no front-end
-##### Bonus 2: Readme bonitinho
-</br>
-
 ### Funcionamento da página:
 #### Tela inicial:
 <img src="https://github.com/user-attachments/assets/f86d334c-a9a3-4801-9482-ddcc2b2b936a"/>
