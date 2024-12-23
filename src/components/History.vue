@@ -64,7 +64,9 @@ async function getGameState(id) {
 }
 
 function showBlackScreen() {
-    blackscreen.classList.add('visible')
+    if (blackscreen) {
+        blackscreen.classList.add('visible')
+    }
 }
 
 function hideBlackScreen() {
@@ -167,35 +169,38 @@ function playRematch(id) {
         </table>
 
         <!-- Janela de iniciar revanche -->
-        <div v-if="windowRematch" class="new-window-div fast-loading">
+        <div v-if="windowRematch" class="new-window-div fast-loading" id="windowRematch">
             <div class="new-window-nav">
                 <button class="new-window-button-close" @click="closeRematchWindow()">X</button>
             </div>
             <h1 class="new-window-title">Iniciar revanche?</h1>
             <div class="new-window-buttons-div">
                 <router-link to="/game">
-                    <button class="new-window-button new-window-button-green"
-                        @click="playRematch(gameId)">Iniciar</button>
+                    <button class="new-window-button new-window-button-green" id="buttonPlayRematch"
+                        @click="playRematch(gameId)">Iniciar
+                    </button>
                 </router-link>
                 <button class="new-window-button new-window-button-red" @click="closeRematchWindow()">Cancelar</button>
             </div>
         </div>
 
         <!-- Janela de confirmar deleção de partida -->
-        <div v-if="windowDelete" class="new-window-div fast-loading">
+        <div v-if="windowDelete" class="new-window-div fast-loading" id="windowDelete">
             <div class="new-window-nav">
                 <button class="new-window-button-close" @click="closeDeleteGameWindow()">X</button>
             </div>
             <h1 class="new-window-title">Deseja realmente deletar essa partida?</h1>
             <div class="new-window-buttons-div">
-                <button class="new-window-button new-window-button-red" @click="deleteGame(gameId)">Deletar</button>
+                <button class="new-window-button new-window-button-red" id="buttonDeleteGame"
+                    @click="deleteGame(gameId)">Deletar
+                </button>
                 <button class="new-window-button new-window-button-green"
                     @click="closeDeleteGameWindow()">Cancelar</button>
             </div>
         </div>
 
         <!-- Janela final da partida -->
-        <div v-if="gameState" class="div-game-state fast-loading">
+        <div v-if="gameState" class="div-game-state fast-loading" id="windowGameState">
             <nav class="board-game-state-nav">
                 <button class="new-window-button-close" @click="closeGameState()">X</button>
             </nav>
