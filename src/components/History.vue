@@ -138,26 +138,32 @@ function playRematch(id) {
 
         <!-- Tabela de histórico de jogos -->
         <table class="table-main">
-            <tr class="table-rows table-first-row">
-                <th>ID da Partida</th>
-                <th>Data</th>
-                <th>Vencedor</th>
-                <th>Detalhes da partida</th>
-                <th>Revanche</th>
-                <th>Deletar partida</th>
-            </tr>
-            <tr v-for="game in games" :key="game.id" class="table-rows table-game-row">
-                <td>{{ game.id }}</td>
-                <td>{{ game.date }}</td>
-                <td class="table-winner">{{ game.winner }}</td>
-                <td><button class="table-view-game" @click="showGameState(game.id)">Ver resultado do jogo</button></td>
-                <td><button class="table-rematch" @click="showRematchWindow(game.id)">Pedir revanche</button></td>
-                <td class="table-delete-row">
-                    <div class="table-delete-game-div" @click="showDeleteGameWindow(game.id)">
-                        <img class="table-delete-game-img" src="../assets/images/icon-trash.png" alt="Deletar Partida">
-                    </div>
-                </td>
-            </tr>
+            <thead>
+                <tr class="table-rows table-first-row">
+                    <th>ID da Partida</th>
+                    <th>Data</th>
+                    <th>Vencedor</th>
+                    <th>Detalhes da partida</th>
+                    <th>Revanche</th>
+                    <th>Deletar partida</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="game in games" :key="game.id" class="table-rows table-game-row">
+                    <td>{{ game.id }}</td>
+                    <td>{{ game.date }}</td>
+                    <td class="table-winner">{{ game.winner }}</td>
+                    <td><button class="table-view-game" @click="showGameState(game.id)">Ver resultado do jogo</button>
+                    </td>
+                    <td><button class="table-rematch" @click="showRematchWindow(game.id)">Pedir revanche</button></td>
+                    <td class="table-delete-row">
+                        <div class="table-delete-game-div" @click="showDeleteGameWindow(game.id)">
+                            <img class="table-delete-game-img" src="../assets/images/icon-trash.png"
+                                alt="Deletar Partida">
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
         </table>
 
         <!-- Janela de iniciar revanche -->

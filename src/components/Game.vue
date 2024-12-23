@@ -179,39 +179,41 @@ function handleFinishedNewGame() {
 
         <!-- Tabela do jogo -->
         <table class="game-table">
-            <tr class="game-row" id="row-1">
-                <td class="game-cell" id="cell-0" @click="setPlay($event.target, 0)">
-                    {{ gameState[0] }}
-                </td>
-                <td class="game-cell" id="cell-1" @click="setPlay($event.target, 1)">
-                    {{ gameState[1] }}
-                </td>
-                <td class="game-cell" id="cell-2" @click="setPlay($event.target, 2)">
-                    {{ gameState[2] }}
-                </td>
-            </tr>
-            <tr class="game-row" id="row-2">
-                <td class="game-cell" id="cell-3" @click="setPlay($event.target, 3)">
-                    {{ gameState[3] }}
-                </td>
-                <td class="game-cell" id="cell-4" @click="setPlay($event.target, 4)">
-                    {{ gameState[4] }}
-                </td>
-                <td class="game-cell" id="cell-5" @click="setPlay($event.target, 5)">
-                    {{ gameState[5] }}
-                </td>
-            </tr>
-            <tr class="game-row" id="row-3">
-                <td class="game-cell" id="cell-6" @click="setPlay($event.target, 6)">
-                    {{ gameState[6] }}
-                </td>
-                <td class="game-cell" id="cell-7" @click="setPlay($event.target, 7)">
-                    {{ gameState[7] }}
-                </td>
-                <td class="game-cell" id="cell-8" @click="setPlay($event.target, 8)">
-                    {{ gameState[8] }}
-                </td>
-            </tr>
+            <tbody>
+                <tr class="game-row" id="row-1">
+                    <td class="game-cell" id="cell-0" @click="setPlay($event.target, 0)">
+                        {{ gameState[0] }}
+                    </td>
+                    <td class="game-cell" id="cell-1" @click="setPlay($event.target, 1)">
+                        {{ gameState[1] }}
+                    </td>
+                    <td class="game-cell" id="cell-2" @click="setPlay($event.target, 2)">
+                        {{ gameState[2] }}
+                    </td>
+                </tr>
+                <tr class="game-row" id="row-2">
+                    <td class="game-cell" id="cell-3" @click="setPlay($event.target, 3)">
+                        {{ gameState[3] }}
+                    </td>
+                    <td class="game-cell" id="cell-4" @click="setPlay($event.target, 4)">
+                        {{ gameState[4] }}
+                    </td>
+                    <td class="game-cell" id="cell-5" @click="setPlay($event.target, 5)">
+                        {{ gameState[5] }}
+                    </td>
+                </tr>
+                <tr class="game-row" id="row-3">
+                    <td class="game-cell" id="cell-6" @click="setPlay($event.target, 6)">
+                        {{ gameState[6] }}
+                    </td>
+                    <td class="game-cell" id="cell-7" @click="setPlay($event.target, 7)">
+                        {{ gameState[7] }}
+                    </td>
+                    <td class="game-cell" id="cell-8" @click="setPlay($event.target, 8)">
+                        {{ gameState[8] }}
+                    </td>
+                </tr>
+            </tbody>
         </table>
 
         <!-- Tela de jogo finalizado -->
