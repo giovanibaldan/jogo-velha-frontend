@@ -104,6 +104,10 @@ Isso irá iniciar o servidor de desenvolvimento, hospedando o projeto localmente
             <pre><b>Vite</b></pre>
         </td>
        <td align="center">
+            <img src="https://skillicons.dev/icons?i=vitest" width="65px" alt="C icon" /><br>
+            <pre><b>Vitest</b></pre>
+        </td>
+       <td align="center">
             <img src="https://skillicons.dev/icons?i=markdown" width="65px" alt="C icon" /><br>
             <pre><b>Markdown</b></pre>
         </td>
